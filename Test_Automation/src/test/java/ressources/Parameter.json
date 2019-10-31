@@ -1,0 +1,38 @@
+{
+
+
+"Projects": 
+[
+	
+	"ProjectName": "Amarla",
+	"Cookie": {
+		"Name":"rl",
+		"Value":"site=Amarla&vlid=19&vid=19"
+	}
+	
+	"Configuration"
+	[
+		{
+			"Environment":"QA",
+			"Path":"https://qa.blue-day.com/",
+			"Credentials": {
+				"Username":"abdelhamid",
+				"Password":"AChaibi"
+			}
+		}
+	
+		{
+			"Environment":"Staging",
+			"Path":"https://stageamarla.bluedayretail.com/",
+			"Credentials": {
+				"Username":"achaibi",
+				"Password":"TYG1101"
+			}
+		}
+	]
+	
+	
+]
+
+
+}
