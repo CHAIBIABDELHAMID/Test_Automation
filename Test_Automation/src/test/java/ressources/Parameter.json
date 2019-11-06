@@ -1,38 +1,62 @@
 {
-
-
-"Projects": 
+"Projects" :
 [
-	
+	{
 	"ProjectName": "Amarla",
 	"Cookie": {
 		"Name":"rl",
 		"Value":"site=Amarla&vlid=19&vid=19"
-	}
+	},
 	
-	"Configuration"
+	"Configuration":
 	[
 		{
 			"Environment":"QA",
 			"Path":"https://qa.blue-day.com/",
-			"Credentials": {
-				"Username":"abdelhamid",
-				"Password":"AChaibi"
-			}
-		}
+			"Username":"abdelhamid",
+			"Password":"AChaibi"
+			
+		},
 	
 		{
 			"Environment":"Staging",
 			"Path":"https://stageamarla.bluedayretail.com/",
-			"Credentials": {
-				"Username":"achaibi",
-				"Password":"TYG1101"
-			}
+			"Username":"achaibi",
+			"Password":"TYG1101"
+			
 		}
 	]
 	
+	},
 	
+	
+	{
+	"ProjectName": "Partsource",
+	"Cookie": {
+		"Name":"rl",
+		"Value":"site=PartSource&vlid=17&vid=17"
+	},
+	
+	"Configuration":
+	[
+		{
+			"Environment":"QA",
+			"Path":"https://qa.blue-day.com/",
+			"Username":"abdelhamid",
+			"Password":"AChaibi"
+			
+		},
+	
+		{
+			"Environment":"Staging",
+			"Path":"https://stageamarla.bluedayretail.com/",
+			"Username":"abdelhamid",
+			"Password":"AChaibi"
+			
+		}
+	]
+	
+	}		
 ]
-
 
 }

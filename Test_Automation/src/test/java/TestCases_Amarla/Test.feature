@@ -3,7 +3,7 @@ Feature: Calendar
 
 
 Scenario: Login
-	Given 	Open browser
-#	When 	Valid <username> is entered
-#	And 	Valid <password> is entered
-#	And		Homepage is displayed
+	Given 	Open browser and start the application
+	When 	Valid username is entered
+	And 	Valid password is entered
+	Then    Homepage is displayed

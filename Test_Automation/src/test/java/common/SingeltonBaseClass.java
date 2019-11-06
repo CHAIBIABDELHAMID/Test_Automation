@@ -18,6 +18,8 @@ public class SingeltonBaseClass {
 			driver = new ChromeDriver(options);
 			driver.manage().window().maximize();
 			
+			ParameterParser pp = new ParameterParser();
+			pp.deserializeProjects();
 			return driver;
 			
 		}else
