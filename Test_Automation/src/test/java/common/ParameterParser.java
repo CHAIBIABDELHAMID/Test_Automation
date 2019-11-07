@@ -11,6 +11,13 @@ import com.google.gson.Gson;
 
 public class ParameterParser {
 
+	public String projectName;
+	public String cookieName;
+	public String cookieValue;
+	public String environment;
+	public String path;
+	public String userName;
+	public String password;
 	
 	
 	
@@ -25,15 +32,17 @@ public class ParameterParser {
 			 br = new BufferedReader(new FileReader("src/test/java/ressources/Parameter.json"));
 			 Projects projects = gson.fromJson(br, Projects.class);
 		
-		if (projects != null) {
-			
-				for(Project project : projects.getProjects()) {
+			 if (projects != null) {
 					
-					System.out.println("Project Name: "+project.getProjectName()+"Environment"+project.getConfiguration().get(0).getEnvironment());
-					
-				}
-		}
-		
+					for(Project project : projects.getProjects()) {
+						
+						System.out.println("Project Environments: "+project.getConfiguration().size());
+						
+					}
+			}
+			 
+			 cookieName = projects.getProjects().get(0).getCookie().getName();
+			 cookieValue = projects.getProjects().get(0).getCookie().getValue();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

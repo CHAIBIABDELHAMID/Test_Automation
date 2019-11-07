@@ -9,7 +9,8 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		features="src/test/java/TestCases_Amarla",
-		glue= {"stepDefinitions_Amarla"})
+		glue= {"stepDefinitions_Amarla"},
+		tags= "~@test")
 
 public class TestRunner {
 

@@ -1,9 +1,14 @@
 Feature: Calendar
 
+Background: User Is Logged In
+	Given Navigate to "Amarla" on "QA" Login page
+	When Submit username and password
+	Then Homepage is Displayed
+	
+	
+	
+@test
+Scenario: Test
+	Given This is a test
+	
 
-
-Scenario: Login
-	Given 	Open browser and start the application
-	When 	Valid username is entered
-	And 	Valid password is entered
-	Then    Homepage is displayed
