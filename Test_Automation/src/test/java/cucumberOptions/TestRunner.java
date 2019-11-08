@@ -10,7 +10,7 @@ import cucumber.api.junit.Cucumber;
 @CucumberOptions(
 		features="src/test/java/TestCases_Amarla",
 		glue= {"stepDefinitions_Amarla"},
-		tags= "~@test")
+		tags= "@test")
 
 public class TestRunner {
 

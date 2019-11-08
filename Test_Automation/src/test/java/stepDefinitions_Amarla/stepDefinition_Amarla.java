@@ -1,12 +1,20 @@
 package stepDefinitions_Amarla;
+
+import org.junit.Assert;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import common.ParameterParser;
 import common.SingeltonBaseClass;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
-import pageFactory_Amarla.Login;
+
+
+import pageFactory_Amarla.LoginPage;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -18,7 +26,7 @@ public class stepDefinition_Amarla extends SingeltonBaseClass{
 
 	public static WebDriver driver  ;
 	
-	
+	public ParameterParser pp = new ParameterParser();
 	
 /*************************************************************************************************/
 	
@@ -29,11 +37,13 @@ public class stepDefinition_Amarla extends SingeltonBaseClass{
 	@Before
 	public void setUp() {
 		driver = getdriver();
+		
 	}
 	
 	
 	@After
 	public void tearDown() {
+		driver.manage().deleteAllCookies();
 		driver.close();
 	}
 	
@@ -45,10 +55,10 @@ public class stepDefinition_Amarla extends SingeltonBaseClass{
 /*************************************************************************************************/
 	@Given("^This is a test$")
 	public void this_is_a_test() throws Throwable {
-		ParameterParser pp = new ParameterParser();
-		pp.deserializeProjects();
-		System.out.println("Cookie Name : "+pp.cookieName.toString()+"\n"+"Cookie Value : "+pp.cookieValue.toString());
-    
+		/*ParameterParser pp = new ParameterParser();
+		pp.deserializeProjects("a","b");
+		System.out.println("Cookie Name : "+pp.cookieName.toString()+"\n"+"Cookie Value : "+pp.cookieValue.toString()); */
+		
 }
 
 	
@@ -62,17 +72,34 @@ public class stepDefinition_Amarla extends SingeltonBaseClass{
 	@Given("^Navigate to \"([^\"]*)\" on \"([^\"]*)\" Login page$")
     public void navigate_to_something_on_something_login_page(String project, String environment) throws Throwable {
        
-    
+		
+		pp.deserializeProjects(project,environment);
+		
+		
+		driver.navigate().to(pp.path);
+		
+		//Setting up cookies
+		Cookie projectCookie = new Cookie(pp.cookieName,pp.cookieValue);
+		driver.manage().addCookie(projectCookie);
+		
+		
+		
+	
 	}
 
     @When("^Submit username and password$")
     public void submit_username_and_password() throws Throwable {
-        
+    	
+    	LoginPage loginPage = new LoginPage(driver);
+    	loginPage.submitUsernameAndPassword(pp.userName,pp.password);
+		
     }
 
     @Then("^Homepage is Displayed$")
     public void homepage_is_displayed() throws Throwable {
         
+    	WebElement bluedayButton = driver.findElement(By.id("linkSiteMap"));
+    	Assert.assertEquals(true,bluedayButton.isDisplayed());
     }
 	
    /*************************************************************************************************/

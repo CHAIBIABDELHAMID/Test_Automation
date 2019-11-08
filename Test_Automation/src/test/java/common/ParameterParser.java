@@ -21,31 +21,58 @@ public class ParameterParser {
 	
 	
 	
-	public void deserializeProjects() {
+	public void deserializeProjects(String jsonProject, String jsonEnvironment) {
 	
-		//Projects projects = new Projects();
+		
 	
 		Gson gson = new Gson();
 		BufferedReader br = null;
+		Projects projects = null;
 		
+		
+		//Reading Json file
 		try {
-			 br = new BufferedReader(new FileReader("src/test/java/ressources/Parameter.json"));
-			 Projects projects = gson.fromJson(br, Projects.class);
-		
-			 if (projects != null) {
-					
-					for(Project project : projects.getProjects()) {
-						
-						System.out.println("Project Environments: "+project.getConfiguration().size());
-						
-					}
-			}
-			 
-			 cookieName = projects.getProjects().get(0).getCookie().getName();
-			 cookieValue = projects.getProjects().get(0).getCookie().getValue();
+				br = new BufferedReader(new FileReader("src/test/java/ressources/Parameter.json"));
+				projects = gson.fromJson(br, Projects.class);
+			
+				if (projects != null) {for(Project project : projects.getProjects());}
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		
+		 
+		
+		 int projectIndex = 0;
+		 int configurationIndex = 0;
+		 //Searching for the Project
+		 do {
+			 if (projects.getProjects().get(projectIndex).getProjectName().toString().toLowerCase().equals(jsonProject.toLowerCase())) {
+				  projectName =	projects.getProjects().get(projectIndex).getProjectName();
+				 cookieName =	projects.getProjects().get(projectIndex).getCookie().getName();
+				 cookieValue =	projects.getProjects().get(projectIndex).getCookie().getValue();	 
+				 	
+				 
+				 //Searching for the Environment
+				 	do {
+				 		if(projects.getProjects().get(projectIndex).getConfiguration().get(configurationIndex).getEnvironment().toString().toLowerCase().equals(jsonEnvironment.toLowerCase())) {
+				 			environment=	projects.getProjects().get(projectIndex).getConfiguration().get(configurationIndex).getEnvironment();
+				 			path=			projects.getProjects().get(projectIndex).getConfiguration().get(configurationIndex).getPath();
+				 			userName=		projects.getProjects().get(projectIndex).getConfiguration().get(configurationIndex).getUsername();
+				 			password=		projects.getProjects().get(projectIndex).getConfiguration().get(configurationIndex).getPassword();
+				 	
+				 		}else configurationIndex ++ ;
+				 	}while(projects.getProjects().get(projectIndex).getConfiguration().size() > configurationIndex && environment == null);
+				 	
+				 	
+			 }else projectIndex ++ ;
+		 }while(projects.getProjects().size() > projectIndex && projectName == null);
+		 
+		
+		 
+		
+		
 		
 		
 		
@@ -53,5 +80,7 @@ public class ParameterParser {
 		
 	
 	}
+
+	
 	
 }

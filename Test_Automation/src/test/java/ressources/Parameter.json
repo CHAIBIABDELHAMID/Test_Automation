@@ -19,7 +19,7 @@
 		},
 	
 		{
-			"Environment":"Staging",
+			"Environment":"Stage",
 			"Path":"https://stageamarla.bluedayretail.com/",
 			"Username":"achaibi",
 			"Password":"TYG1101"
@@ -48,7 +48,7 @@
 		},
 	
 		{
-			"Environment":"Staging",
+			"Environment":"Stage",
 			"Path":"https://stageamarla.bluedayretail.com/",
 			"Username":"abdelhamid",
 			"Password":"AChaibi"
