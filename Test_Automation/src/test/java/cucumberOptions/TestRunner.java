@@ -12,6 +12,7 @@ import cucumber.api.junit.Cucumber;
 		glue= {"stepDefinitions_Amarla"},
 		tags= "@test")
 
+
 public class TestRunner {
 
 	
