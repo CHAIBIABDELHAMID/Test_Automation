@@ -75,7 +75,6 @@ public class stepDefinition_Amarla extends SingeltonBaseClass{
 		
 		pp.deserializeProjects(project,environment);
 		
-		
 		driver.navigate().to(pp.path);
 		
 		//Setting up cookies
@@ -91,7 +90,7 @@ public class stepDefinition_Amarla extends SingeltonBaseClass{
     public void submit_username_and_password() throws Throwable {
     	
     	LoginPage loginPage = new LoginPage(driver);
-    	loginPage.submitUsernameAndPassword(pp.userName,pp.password);
+    	loginPage.submit_username_and_password(pp.userName,pp.password);
 		
     }
 
