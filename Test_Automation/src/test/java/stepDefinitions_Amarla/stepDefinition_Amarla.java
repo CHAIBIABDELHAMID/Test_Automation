@@ -61,6 +61,28 @@ public class stepDefinition_Amarla extends SingeltonBaseClass{
 		
 		
 		parser.deserializeMenus("STM");
+		
+			System.out.println(parser.default_menu0);
+			System.out.println(parser.default_menu1);
+			System.out.println(parser.default_menu2);
+			System.out.println(parser.default_menu3);
+			System.out.println(parser.default_menu4);
+			System.out.println(parser.default_menu5);
+			System.out.println(parser.default_menu6);
+			System.out.println(parser.default_menu7);
+			System.out.println(parser.default_menu8);
+			System.out.println(parser.default_menu9);
+			System.out.println(parser.more_menu0);
+			System.out.println(parser.more_menu1);
+			System.out.println(parser.more_menu2);
+			System.out.println(parser.more_menu3);
+			System.out.println(parser.more_menu4);
+			System.out.println(parser.more_menu5);
+			System.out.println(parser.more_menu6);
+			System.out.println(parser.more_menu7);
+			System.out.println(parser.more_menu8);
+			System.out.println(parser.more_menu9);
+			
 		/*ParameterParser pp = new ParameterParser();
 		pp.deserializeProjects("a","b");
 		System.out.println("Cookie Name : "+pp.cookieName.toString()+"\n"+"Cookie Value : "+pp.cookieValue.toString()); */
@@ -102,7 +124,7 @@ public class stepDefinition_Amarla extends SingeltonBaseClass{
 
     @Then("^Homepage is Displayed$")
     public void homepage_is_displayed() throws Throwable {
-        
+    	
     	wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("linkSiteMap")));
     	WebElement bluedayButton = driver.findElement(By.id("linkSiteMap"));
     	Assert.assertEquals(true,bluedayButton.isDisplayed());

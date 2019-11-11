@@ -11,6 +11,8 @@ import com.google.gson.Gson;
 
 public class Parser {
 
+	
+//					deserializeProjects variables					//
 	public String projectName;
 	public String cookieName;
 	public String cookieValue;
@@ -18,6 +20,27 @@ public class Parser {
 	public String path;
 	public String userName;
 	public String password;
+
+	
+	
+//					deserializeMenus variables						//
+	public String role;
+	
+	public String default_menu0;		public String more_menu0;
+	public String default_menu1;		public String more_menu1;
+	public String default_menu2;		public String more_menu2;
+	public String default_menu3;		public String more_menu3;
+	public String default_menu4;		public String more_menu4;
+	public String default_menu5;		public String more_menu5;
+	public String default_menu6;		public String more_menu6;
+	public String default_menu7;		public String more_menu7;
+	public String default_menu8;		public String more_menu8;
+	public String default_menu9;		public String more_menu9;
+	
+	
+	
+	
+	
 	
 	
 	
@@ -70,17 +93,7 @@ public class Parser {
 			 }else projectIndex ++ ;
 		 }while(projects.getProjects().size() > projectIndex && projectName == null);
 		 
-		
-		 
-		
-		
-		
-		
-		
-		
-		
-	
-	}
+}
 	
 	
 	
@@ -107,20 +120,38 @@ public class Parser {
 			e.printStackTrace();
 		}
 		
-		System.out.println(menus.getMenu().size());
 		
-		
+		int roleIndex = 0;
+		do {
+			 if (menus.getMenu().get(roleIndex).getRole().toLowerCase().equals(jsonRole.toLowerCase())) {
+				
+				role = menus.getMenu().get(roleIndex).getRole();
+				default_menu0 	= menus.getMenu().get(roleIndex).getDefaultMenu().getNavbarMenu0();
+				default_menu1 	= menus.getMenu().get(roleIndex).getDefaultMenu().getNavbarMenu1();
+				default_menu2 	= menus.getMenu().get(roleIndex).getDefaultMenu().getNavbarMenu2();
+				default_menu3 	= menus.getMenu().get(roleIndex).getDefaultMenu().getNavbarMenu3();
+				default_menu4 	= menus.getMenu().get(roleIndex).getDefaultMenu().getNavbarMenu4();
+				default_menu5 	= menus.getMenu().get(roleIndex).getDefaultMenu().getNavbarMenu5();
+				default_menu6 	= menus.getMenu().get(roleIndex).getDefaultMenu().getNavbarMenu6();
+				default_menu7 	= menus.getMenu().get(roleIndex).getDefaultMenu().getNavbarMenu7();
+				default_menu8 	= menus.getMenu().get(roleIndex).getDefaultMenu().getNavbarMenu8();
+				default_menu9 	= menus.getMenu().get(roleIndex).getDefaultMenu().getNavbarMenu9();
+				
+				more_menu0 		= menus.getMenu().get(roleIndex).getMoreMenu().getMoreMenu0();
+				more_menu1 		= menus.getMenu().get(roleIndex).getMoreMenu().getMoreMenu1();
+				more_menu2 		= menus.getMenu().get(roleIndex).getMoreMenu().getMoreMenu2();
+				more_menu3 		= menus.getMenu().get(roleIndex).getMoreMenu().getMoreMenu3();
+				more_menu4 		= menus.getMenu().get(roleIndex).getMoreMenu().getMoreMenu4();
+				more_menu5 		= menus.getMenu().get(roleIndex).getMoreMenu().getMoreMenu5();
+				more_menu6 		= menus.getMenu().get(roleIndex).getMoreMenu().getMoreMenu6();
+				more_menu7 		= menus.getMenu().get(roleIndex).getMoreMenu().getMoreMenu7();
+				more_menu8 		= menus.getMenu().get(roleIndex).getMoreMenu().getMoreMenu8();
+				more_menu9		= menus.getMenu().get(roleIndex).getMoreMenu().getMoreMenu9();
+				
+				 	
+			 }else roleIndex ++ ;
+		 }while(menus.getMenu().size() > roleIndex && role == null);
 		 
-		
-		 
-		
-		 
-		
-		
-		
-		
-		
-		
 		
 	
 	}
