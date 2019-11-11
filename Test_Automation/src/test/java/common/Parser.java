@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 
 
 
-public class ParameterParser {
+public class Parser {
 
 	public String projectName;
 	public String cookieName;
@@ -26,15 +26,15 @@ public class ParameterParser {
 		
 		
 	
-		Gson gson = new Gson();
-		BufferedReader br = null;
+		Gson gson_projects = new Gson();
+		BufferedReader br_projects = null;
 		Projects projects = null;
 		
 		
 		//Reading Json file
 		try {
-				br = new BufferedReader(new FileReader("src/test/java/ressources/Parameter.json"));
-				projects = gson.fromJson(br, Projects.class);
+				br_projects = new BufferedReader(new FileReader("src/test/java/ressources/Parameter.json"));
+				projects = gson_projects.fromJson(br_projects, Projects.class);
 			
 				if (projects != null) {for(Project project : projects.getProjects());}
 
@@ -50,7 +50,7 @@ public class ParameterParser {
 		 //Searching for the Project
 		 do {
 			 if (projects.getProjects().get(projectIndex).getProjectName().toString().toLowerCase().equals(jsonProject.toLowerCase())) {
-				  projectName =	projects.getProjects().get(projectIndex).getProjectName();
+				 projectName =	projects.getProjects().get(projectIndex).getProjectName();
 				 cookieName =	projects.getProjects().get(projectIndex).getCookie().getName();
 				 cookieValue =	projects.getProjects().get(projectIndex).getCookie().getValue();	 
 				 	
@@ -81,6 +81,50 @@ public class ParameterParser {
 		
 	
 	}
+	
+	
+	
+	
+	
+	public void deserializeMenus(String jsonRole) {
+		
+		
+		
+		
+		Gson gson_menus = new Gson();
+		BufferedReader br_menus = null;
+		Menus menus = null;
+		
+		
+		//Reading Json file
+		try {
+				br_menus = new BufferedReader(new FileReader("src/test/java/ressources/Menu.json"));
+				menus = gson_menus.fromJson(br_menus, Menus.class);
+			
+				if (menus != null) {for(Menu menu : menus.getMenu());}
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(menus.getMenu().size());
+		
+		
+		 
+		
+		 
+		
+		 
+		
+		
+		
+		
+		
+		
+		
+	
+	}
+
 
 	
 	

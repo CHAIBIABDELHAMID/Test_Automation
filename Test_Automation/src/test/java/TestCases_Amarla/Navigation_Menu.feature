@@ -1,4 +1,4 @@
-Feature: Calendar
+Feature: Navigation Menu
 
 Background: User Is Logged In
 	Given Navigate to "amarla" on "qa" Login page
