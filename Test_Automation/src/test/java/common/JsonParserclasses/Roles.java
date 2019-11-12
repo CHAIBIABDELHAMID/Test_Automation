@@ -1,21 +1,22 @@
 package common.JsonParserclasses;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DefaultMenu {
+public class Roles {
 
-@SerializedName("Default_menu")
+@SerializedName("Roles")
 @Expose
-private String defaultMenu;
+private List<Role> roles = null;
 
 /////////////////////////////////////////////Getter&Setter/////////////////////////////////////////////
-public String getDefaultMenu() {
-return defaultMenu;
+public List<Role> getRoles() {
+return roles;
 }
 
-public void setDefaultMenu(String defaultMenu) {
-this.defaultMenu = defaultMenu;
+public void setRoles(List<Role> roles) {
+this.roles = roles;
 }
 
 }

@@ -1,125 +1,125 @@
 {
-"Menu" :
+"Roles" :
 [
 
-	{"Role": "STM",
-	"DefaultMenu": {
-		"Navbar_menu0"  : "Calendar",
-		"Navbar_menu1"  : "Store Plan",
-		"Navbar_menu2"  : "Store Week",
-		"Navbar_menu3"  : "Ind. Perf. Sum.",
-		"Navbar_menu4"  : "CSL Performance",
-		"Navbar_menu5"  : "Top 10 Segments",
-		"Navbar_menu6"  : "N/A",
-		"Navbar_menu7"  : "N/A",
-		"Navbar_menu8"  : "N/A",
-		"Navbar_menu9" 	: "N/A"
-	},
-	"MoreMenu": {	
-		"More_menu0" 	: "Trend Graph",
-		"More_menu1" 	: "Skills",
-		"More_menu2" 	: "N/A",
-		"More_menu3" 	: "N/A",
-		"More_menu4" 	: "N/A",
-		"More_menu5" 	: "N/A",
-		"More_menu6" 	: "N/A",
-		"More_menu7" 	: "N/A",
-		"More_menu8" 	: "N/A",
-		"More_menu9" 	: "N/A"
-	}
-	},
-	
-	
-/////////////////////////////////////////////////
-
-
-	{"Role": "COR",
-	"DefaultMenu": {
-		"Navbar_menu0"  : "Calendar",
-		"Navbar_menu1"  : "Plan",
-		"Navbar_menu2"  : "Ranking",
-		"Navbar_menu3"  : "Plot",
-		"Navbar_menu4"  : "CSL Performance",
-		"Navbar_menu5"  : "N/A",
-		"Navbar_menu6"  : "N/A",
-		"Navbar_menu7"  : "N/A",
-		"Navbar_menu8"  : "N/A",
-		"Navbar_menu9" 	: "N/A"
-	},
-	"MoreMenu": {	
-		"More_menu0" 	: "Store Plan",
-		"More_menu1" 	: "Store Week",
-		"More_menu2" 	: "Top 10 Segments",
-		"More_menu3" 	: "Ind. Perf. Sum.",
-		"More_menu4" 	: "Trend Graph",
-		"More_menu5" 	: "Skills",
-		"More_menu6" 	: "N/A",
-		"More_menu7" 	: "N/A",
-		"More_menu8" 	: "N/A",
-		"More_menu9" 	: "N/A"
-	}
+	{"RoleName": "STM",
+	"DefaultMenu": [
+		{"Default_menu"  : "Calendar"},
+		{"Default_menu"  : "Store Plan"},
+		{"Default_menu"  : "Store Week"},
+		{"Default_menu"  : "Ind. Perf. Sum."},
+		{"Default_menu"  : "CSL Performance"},
+		{"Default_menu"  : "Top 10 Segments"},
+		{"Default_menu"  : "N/A"},
+		{"Default_menu"  : "N/A"},
+		{"Default_menu"  : "N/A"},
+		{"Default_menu"  : "N/A"}
+	],
+	"MoreMenu": [	
+		{"More_menu" 	: "Trend Graph"},
+		{"More_menu" 	: "Skills"},
+		{"More_menu" 	: "N/A"},
+		{"More_menu" 	: "N/A"},
+		{"More_menu" 	: "N/A"},
+		{"More_menu" 	: "N/A"},
+		{"More_menu" 	: "N/A"},
+		{"More_menu" 	: "N/A"},
+		{"More_menu" 	: "N/A"},
+		{"More_menu" 	: "N/A"}
+	]
 	},
 	
 	
 /////////////////////////////////////////////////
 
 
-	{"Role": "DIV",
-	"DefaultMenu": {
-		"Navbar_menu0"  : "Calendar",
-		"Navbar_menu1"  : "Plan",
-		"Navbar_menu2"  : "Ranking",
-		"Navbar_menu3"  : "Plot",
-		"Navbar_menu4"  : "CSL Performance",
-		"Navbar_menu5"  : "N/A",
-		"Navbar_menu6"  : "N/A",
-		"Navbar_menu7"  : "N/A",
-		"Navbar_menu8"  : "N/A",
-		"Navbar_menu9" 	: "N/A"
+	{"RoleName": "COR",
+	"DefaultMenu": [
+		{"Default_menu"  : "Calendar"},
+		{"Default_menu"  : "Plan"},
+		{"Default_menu"  : "Ranking"},
+		{"Default_menu"  : "Plot"},
+		{"Default_menu"  : "CSL Performance"},
+		{"Default_menu"  : "N/A"},
+		{"Default_menu"  : "N/A"},
+		{"Default_menu"  : "N/A"},
+		{"Default_menu"  : "N/A"},
+		{"Default_menu"  : "N/A"}
+	],
+	"MoreMenu": [	
+		{"More_menu" 	: "Store Plan"},
+		{"More_menu" 	: "Store Week"},
+		{"More_menu" 	: "Top 10 Segments"},
+		{"More_menu" 	: "Ind. Perf. Sum."},
+		{"More_menu" 	: "Trend Graph"},
+		{"More_menu" 	: "Skills"},
+		{"More_menu" 	: "N/A"},
+		{"More_menu" 	: "N/A"},
+		{"More_menu" 	: "N/A"},
+		{"More_menu" 	: "N/A"}
+	]
 	},
-	"MoreMenu": {	
-		"More_menu0" 	: "Store Plan",
-		"More_menu1" 	: "Store Week",
-		"More_menu2" 	: "Top 10 Segments",
-		"More_menu3" 	: "Ind. Perf. Sum.",
-		"More_menu4" 	: "Trend Graph",
-		"More_menu5" 	: "Skills",
-		"More_menu6" 	: "N/A",
-		"More_menu7" 	: "N/A",
-		"More_menu8" 	: "N/A",
-		"More_menu9" 	: "N/A"
-	}
+	
+	
+/////////////////////////////////////////////////
+
+
+	{"RoleName": "DIV",
+	"DefaultMenu": [
+		{"Default_menu"  : "Calendar"},
+		{"Default_menu"  : "Plan"},
+		{"Default_menu"  : "Ranking"},
+		{"Default_menu"  : "Plot"},
+		{"Default_menu"  : "CSL Performance"},
+		{"Default_menu"  : "N/A"},
+		{"Default_menu"  : "N/A"},
+		{"Default_menu"  : "N/A"},
+		{"Default_menu"  : "N/A"},
+		{"Default_menu"  : "N/A"}
+	],
+	"MoreMenu": [	
+		{"More_menu" 	: "Store Plan"},
+		{"More_menu" 	: "Store Week"},
+		{"More_menu" 	: "Top 10 Segments"},
+		{"More_menu" 	: "Ind. Perf. Sum."},
+		{"More_menu" 	: "Trend Graph"},
+		{"More_menu" 	: "Skills"},
+		{"More_menu" 	: "N/A"},
+		{"More_menu" 	: "N/A"},
+		{"More_menu" 	: "N/A"},
+		{"More_menu" 	: "N/A"}
+	]
 	},	
 	
 	
 /////////////////////////////////////////////////
 
 
-	{"Role": "REG",
-	"DefaultMenu": {
-		"Navbar_menu0"  : "Calendar",
-		"Navbar_menu1"  : "Plan",
-		"Navbar_menu2"  : "Ranking",
-		"Navbar_menu3"  : "Plot",
-		"Navbar_menu4"  : "CSL Performance",
-		"Navbar_menu5"  : "N/A",
-		"Navbar_menu6"  : "N/A",
-		"Navbar_menu7"  : "N/A",
-		"Navbar_menu8"  : "N/A",
-		"Navbar_menu9" 	: "N/A"
-	},
-	"MoreMenu": {	
-		"More_menu0" 	: "Store Plan",
-		"More_menu1" 	: "Store Week",
-		"More_menu2" 	: "Top 10 Segments",
-		"More_menu3" 	: "Ind. Perf. Sum.",
-		"More_menu4" 	: "Trend Graph",
-		"More_menu5" 	: "Skills",
-		"More_menu6" 	: "N/A",
-		"More_menu7" 	: "N/A",
-		"More_menu8" 	: "N/A",
-		"More_menu9" 	: "N/A"
-	}
+	{"RoleName": "REG",
+	"DefaultMenu": [
+		{"Default_menu"  : "Calendar"},
+		{"Default_menu"  : "Plan"},
+		{"Default_menu"  : "Ranking"},
+		{"Default_menu"  : "Plot"},
+		{"Default_menu"  : "CSL Performance"},
+		{"Default_menu"  : "N/A"},
+		{"Default_menu"  : "N/A"},
+		{"Default_menu"  : "N/A"},
+		{"Default_menu"  : "N/A"},
+		{"Default_menu"  : "N/A"}
+	],
+	"MoreMenu": [	
+		{"More_menu" 	: "Store Plan"},
+		{"More_menu" 	: "Store Week"},
+		{"More_menu" 	: "Top 10 Segments"},
+		{"More_menu" 	: "Ind. Perf. Sum."},
+		{"More_menu" 	: "Trend Graph"},
+		{"More_menu" 	: "Skills"},
+		{"More_menu" 	: "N/A"},
+		{"More_menu" 	: "N/A"},
+		{"More_menu" 	: "N/A"},
+		{"More_menu" 	: "N/A"}
+	]
 	}
 	
 		
