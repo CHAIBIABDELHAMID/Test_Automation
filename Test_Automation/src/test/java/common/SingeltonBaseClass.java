@@ -7,23 +7,26 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class SingeltonBaseClass {
 
-	protected static WebDriver driver;
+	public  WebDriver driver;
 	
-	public static WebDriver getdriver() {
+	public  WebDriver getdriver() {
 		
-		System.setProperty("webdriver.chrome.driver", "src/test/java/ressources/chromedriver.exe");
+		
 		
 		if(driver == null) {
+			
+			System.setProperty("webdriver.chrome.driver", "src/test/java/ressources/chromedriver.exe");
 			ChromeOptions options = new ChromeOptions();
 			options.setExperimentalOption("useAutomationExtension", false);
 			driver = new ChromeDriver(options);
 			driver.manage().window().maximize();
 			
 			
-			return driver;
+		return driver;
 			
 		}else
-			return driver;
+			{return driver;}
+		
 	}
 
 

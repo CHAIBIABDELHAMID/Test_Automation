@@ -130,7 +130,7 @@ public class Parser {
 			
 		}while(roles.getRoles().size() > rolesIndex && default_menu.isEmpty());
 	
-		System.out.println(default_menu.size()+"_"+more_menu.size());
+		
 	
 	}
 	

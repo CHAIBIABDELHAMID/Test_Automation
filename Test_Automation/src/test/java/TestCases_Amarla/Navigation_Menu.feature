@@ -10,10 +10,15 @@ Background: User Is Logged In
 @test
 Scenario: Test
 	Given This is a test
-	
-Scenario: Check STM Role Menu
-	Given Role "STM" is selected
+
+@test
+Scenario Outline: Check STM Role Menu
+	Given Role <role> is selected
 	And Default page is displayed
 	When Navigate from menus
 	Then Menu is correctly displayed
-
+	Examples:
+	| role |
+	| STM  |
+	| REG  |
+	| DIV  |
