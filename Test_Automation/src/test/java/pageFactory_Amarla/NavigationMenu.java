@@ -2,6 +2,7 @@ package pageFactory_Amarla;
 
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -18,8 +19,12 @@ public class NavigationMenu {
 	WebElement settings_btn ;
 	@FindBy(xpath = "//div[contains(text(),'Change Role »')]")
 	WebElement changeRole_btn ;
+	@FindBy(xpath = "//div[@class='dNavBar']")
+	WebElement navigationBar;
+	@FindBy(xpath = "//div[@class='dropdown'][1]//div[@class='dropdown-content More']")
+	WebElement moreMenu;
 	
-	public NavigationMenu(WebDriver driver) {
+ 	public NavigationMenu(WebDriver driver) {
 		
 		 this.driver = driver;
 		 PageFactory.initElements(driver, this);
@@ -53,6 +58,36 @@ public class NavigationMenu {
 	}
 	
 	
+	
+	public boolean CheckMenu(List <String>validDefaultMenu, List <String>validMoreMenu) {
+		
+		boolean equals = true;
+		List<WebElement> navigation = navigationBar.findElements(By.xpath("*"));
+		List<WebElement> actualDefaultMenu = new ArrayList <WebElement> ();
+		int navigationIndex=0;
+		int actualDefaultIndex=0;
+		boolean finish = false;
+		
+		do {
+			
+			String attribute = navigation.get(navigationIndex).getAttribute("class").toString().toLowerCase();
+			if(attribute.contains("dmenu")) {
+				
+				actualDefaultMenu.add(actualDefaultIndex, navigation.get(navigationIndex));
+				System.out.println(actualDefaultMenu.get(actualDefaultIndex).getText());
+				actualDefaultIndex++;
+				navigationIndex ++;
+				
+			}else {navigationIndex ++; finish = true;}
+			
+		}while(!finish);
+		
+		
+		
+		
+		
+		return equals;
+	}
 	
 
 }

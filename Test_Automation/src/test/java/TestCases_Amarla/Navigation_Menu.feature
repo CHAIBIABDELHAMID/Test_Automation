@@ -1,20 +1,18 @@
 Feature: Navigation Menu
 
 Background: User Is Logged In
-	Given Navigate to "amarla" on "qa" Login page
-	When Submit username and password
-	Then Homepage is Displayed
+	Given Navigate to "amarla" on "qa" Login page and connect
 	
 	
 	
-@test
+
 Scenario: Test
 	Given This is a test
 
 @test
-Scenario Outline: Check STM Role Menu
-	Given Role <role> is selected
-	And Default page is displayed
+Scenario Outline: Check All Role Menu
+	When Role <role> is selected
+	And  The default menu is correct
 	When Navigate from menus
 	Then Menu is correctly displayed
 	Examples:

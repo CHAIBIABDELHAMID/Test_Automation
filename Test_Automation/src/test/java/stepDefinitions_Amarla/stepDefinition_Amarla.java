@@ -1,5 +1,6 @@
 package stepDefinitions_Amarla;
 
+
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Assert;
@@ -9,6 +10,7 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.SessionId;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,12 +30,11 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 
 
-public class stepDefinition_Amarla extends SingeltonBaseClass{
+public class stepDefinition_Amarla {
 
-
-	public  WebDriver driver ;
-	public  WebDriverWait wait ;
 	
+	public  static WebDriver driver ;
+	public  WebDriverWait wait ;
 	public Parser parser = new Parser();
 	
 /*************************************************************************************************/
@@ -44,7 +45,9 @@ public class stepDefinition_Amarla extends SingeltonBaseClass{
 
 	@Before
 	public void setUp() {
-		driver = getdriver();	
+		
+		SingeltonBaseClass instance = SingeltonBaseClass.getInstance();
+		driver = instance.getdriver();
 		wait = new WebDriverWait(driver, 10);
 		
 	}
@@ -52,9 +55,12 @@ public class stepDefinition_Amarla extends SingeltonBaseClass{
 	
 	@After
 	public void tearDown() {
-		//driver.manage().deleteAllCookies();
-		driver.close();
-		}
+		driver.manage().deleteAllCookies();
+		driver.quit();
+		SingeltonBaseClass.getInstance().driver=null;
+
+		
+	}
 	
 	
 /*************************************************************************************************/
@@ -88,34 +94,25 @@ public class stepDefinition_Amarla extends SingeltonBaseClass{
 /*************************************************************************************************/
 	
 	
-	@Given("^Navigate to \"([^\"]*)\" on \"([^\"]*)\" Login page$")
-    public void navigate_to_something_on_something_login_page(String project, String environment) throws Throwable {
+	@Given("^Navigate to \"([^\"]*)\" on \"([^\"]*)\" Login page and connect$")
+    public void navigate_to_something_on_something_login_page_and_connect(String project, String environment) throws Throwable {
        
 		parser.deserializeProjects(project,environment);
 		driver.get(parser.path);
 		//Setting up cookies
 		Cookie projectCookie = new Cookie(parser.cookieName,parser.cookieValue);
 		driver.manage().addCookie(projectCookie);
-	
-	}
-
-    @When("^Submit username and password$")
-    public void submit_username_and_password() throws Throwable {
-    	
-    	LoginPage loginPage = new LoginPage(driver);
+		//Connecting using username and password
+		LoginPage loginPage = new LoginPage(driver);
     	loginPage.submit_username_and_password(parser.userName,parser.password);
-    	
-		
-    }
-
-    @Then("^Homepage is Displayed$")
-    public void homepage_is_displayed() throws Throwable {
-    	
+    	//Check if the Home page is displayed
     	wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("linkSiteMap")));
     	WebElement bluedayButton = driver.findElement(By.id("linkSiteMap"));
     	Assert.assertEquals(true,bluedayButton.isDisplayed());
-    }
 	
+	}
+
+   
    /*************************************************************************************************/
    /*************************************************************************************************/
     @Given("^Role (.+) is selected$")
@@ -146,9 +143,11 @@ public class stepDefinition_Amarla extends SingeltonBaseClass{
       
     }
 
-    @And("^Default page is displayed$")
-    public void default_page_is_displayed() throws Throwable {
-        
+    @When("^The default menu is correct$")
+    public void the_default_menu_is_correct() throws Throwable {
+    	NavigationMenu navMenu = new NavigationMenu(driver);
+    	navMenu.CheckMenu(parser.default_menu,parser.more_menu);
+    
     }
 	
 	
