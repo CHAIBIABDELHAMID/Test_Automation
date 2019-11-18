@@ -10,7 +10,7 @@ Scenario: Test
 	Given This is a test
 
 @test
-Scenario Outline: Check All Role Menu
+Scenario Outline: Check All Roles Menu
 	When Role <role> is selected
 	And  The default menu is correct
 	When Navigate from menus

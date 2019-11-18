@@ -115,7 +115,12 @@ public class stepDefinition_Amarla {
    
    /*************************************************************************************************/
    /*************************************************************************************************/
-    @Given("^Role (.+) is selected$")
+    
+	
+	
+	
+	
+	@Given("^Role (.+) is selected$")
     public void role_is_selected(String role) throws Throwable {
        
     //@Given("^Role \"([^\"]*)\" is selected$")

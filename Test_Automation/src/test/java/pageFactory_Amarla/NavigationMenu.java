@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+
+import cucumber.api.java.gl.E;
 
 public class NavigationMenu {
 	
@@ -21,8 +24,9 @@ public class NavigationMenu {
 	WebElement changeRole_btn ;
 	@FindBy(xpath = "//div[@class='dNavBar']")
 	WebElement navigationBar;
-	@FindBy(xpath = "//div[@class='dropdown'][1]//div[@class='dropdown-content More']")
+	@FindBy(xpath = "//div[@class='dNavBar']/div[@class='dropdown']/div[contains(@class,'More')]")
 	WebElement moreMenu;
+	
 	
  	public NavigationMenu(WebDriver driver) {
 		
@@ -62,30 +66,37 @@ public class NavigationMenu {
 	public boolean CheckMenu(List <String>validDefaultMenu, List <String>validMoreMenu) {
 		
 		boolean equals = true;
+		
+		
+		//Parsing Actual Default menu into <String> List
 		List<WebElement> navigation = navigationBar.findElements(By.xpath("*"));
-		List<WebElement> actualDefaultMenu = new ArrayList <WebElement> ();
-		int navigationIndex=0;
-		int actualDefaultIndex=0;
-		boolean finish = false;
-		
-		do {
-			
-			String attribute = navigation.get(navigationIndex).getAttribute("class").toString().toLowerCase();
+		List<String> actualDefaultMenu = new ArrayList <String> ();
+		for(WebElement e: navigation) {
+			String attribute = e.getAttribute("class").toString().toLowerCase();
 			if(attribute.contains("dmenu")) {
+				actualDefaultMenu.add(e.getText());
+				}
 				
-				actualDefaultMenu.add(actualDefaultIndex, navigation.get(navigationIndex));
-				System.out.println(actualDefaultMenu.get(actualDefaultIndex).getText());
-				actualDefaultIndex++;
-				navigationIndex ++;
-				
-			}else {navigationIndex ++; finish = true;}
-			
-		}while(!finish);
+		 }
+		
+		//Parsing Actual More menu into <String> List
+		List<WebElement> morenavigation =  moreMenu.findElements(By.xpath("*"));
+		List<String> actualMoreMenu  = new ArrayList <String> ();
+		for(WebElement e: morenavigation) {
+			 ((JavascriptExecutor)driver).executeScript("return arguments[0].innerText;", e).toString();
+			 actualMoreMenu.add( ((JavascriptExecutor)driver).executeScript("return arguments[0].innerText;", e).toString());
+		}
 		
 		
 		
 		
 		
+		
+		
+		
+		
+		
+	
 		return equals;
 	}
 	

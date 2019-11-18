@@ -118,10 +118,10 @@ public class Parser {
 			if(roles.getRoles().get(rolesIndex).getRoleName().toLowerCase().equals(jsonRole.toLowerCase())) {
 				
 				int menuSize = roles.getRoles().get(rolesIndex).getDefaultMenu().size();
-				
-				
 				for(int i = 0; i < menuSize ; i++) {
+					if (!roles.getRoles().get(rolesIndex).getDefaultMenu().get(i).getDefaultMenu().equalsIgnoreCase("N/A"))
 					default_menu.add(i, roles.getRoles().get(rolesIndex).getDefaultMenu().get(i).getDefaultMenu());
+					if(!roles.getRoles().get(rolesIndex).getMoreMenu().get(i).getMoreMenu().equalsIgnoreCase("N/A"))
 					more_menu.add(i, roles.getRoles().get(rolesIndex).getMoreMenu().get(i).getMoreMenu());
 				}
 				
