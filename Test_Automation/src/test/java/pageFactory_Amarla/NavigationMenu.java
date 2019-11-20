@@ -27,6 +27,11 @@ public class NavigationMenu {
 	@FindBy(xpath = "//div[@class='dNavBar']/div[@class='dropdown']/div[contains(@class,'More')]")
 	WebElement moreMenu;
 	
+	List<String> actualDefaultMenu = new ArrayList <String> ();
+	List<String> actualMoreMenu  = new ArrayList <String> ();
+	List<WebElement> unifiedListMenu = new ArrayList <WebElement> ();
+	Boolean oneDOccurence = true;
+	Boolean oneMOccurence = true;
 	
  	public NavigationMenu(WebDriver driver) {
 		
@@ -67,38 +72,61 @@ public class NavigationMenu {
 		
 		boolean equals = true;
 		
+		int i =0;
+		do {
+			
+			parseDefaultmenu();
+			parseMoremenu();
+			
+			
+			if(actualDefaultMenu.equals(validDefaultMenu)&&actualMoreMenu.equals(validMoreMenu)) {
+				equals = true;
+				i++;}
+			else {
+				equals = false;
+						System.out.println(equals);
+				}
+			
+			unifiedListMenu.get(i).click();
+			actualDefaultMenu.clear();
+			actualMoreMenu.clear();
+			
+		}while(unifiedListMenu.size()> i);
 		
-		//Parsing Actual Default menu into <String> List
+		
+		
+		return equals;
+	}
+	
+	
+	public void parseDefaultmenu() {
+		
 		List<WebElement> navigation = navigationBar.findElements(By.xpath("*"));
-		List<String> actualDefaultMenu = new ArrayList <String> ();
 		for(WebElement e: navigation) {
 			String attribute = e.getAttribute("class").toString().toLowerCase();
 			if(attribute.contains("dmenu")) {
-				actualDefaultMenu.add(e.getText());
+				actualDefaultMenu.add(e.getAttribute("innerHTML").toString());
+				if(oneDOccurence)unifiedListMenu.add(e);
 				}
-				
-		 }
+		}
+		oneDOccurence = false;
 		
-		//Parsing Actual More menu into <String> List
+	}
+	
+	public void parseMoremenu() {
+	
 		List<WebElement> morenavigation =  moreMenu.findElements(By.xpath("*"));
-		List<String> actualMoreMenu  = new ArrayList <String> ();
 		for(WebElement e: morenavigation) {
-			 ((JavascriptExecutor)driver).executeScript("return arguments[0].innerText;", e).toString();
-			 actualMoreMenu.add( ((JavascriptExecutor)driver).executeScript("return arguments[0].innerText;", e).toString());
+		 actualMoreMenu.add(e.getAttribute("innerHTML").toString());
+		 if(oneMOccurence)unifiedListMenu.add(e);
 		}
 		
+		oneMOccurence = false;
 		
-		
-		
-		
-		
-		
-		
-		
-		
-	
-		return equals;
 	}
+	
+	
+	
 	
 
 }
