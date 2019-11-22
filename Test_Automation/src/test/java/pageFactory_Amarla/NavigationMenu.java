@@ -22,16 +22,14 @@ public class NavigationMenu {
 	WebElement settings_btn ;
 	@FindBy(xpath = "//div[contains(text(),'Change Role »')]")
 	WebElement changeRole_btn ;
-	@FindBy(xpath = "//div[@class='dNavBar']")
+	@FindBy(xpath = "//div[@id='dNavigationBar']")
 	WebElement navigationBar;
-	@FindBy(xpath = "//div[@class='dNavBar']/div[@class='dropdown']/div[contains(@class,'More')]")
-	WebElement moreMenu;
+	
 	
 	List<String> actualDefaultMenu ;
 	List<String> actualMoreMenu  ;
 	public List<WebElement> unifiedListMenu; 
-	Boolean oneDOccurence = true;
-	Boolean oneMOccurence = true;
+
 	
  	public NavigationMenu(WebDriver driver) {
 		
@@ -72,17 +70,32 @@ public class NavigationMenu {
 		
 		
 		boolean equals = true;
+		
+		
 		unifiedListMenu = new ArrayList <WebElement> ();
+		unifiedListMenu = navigationBar.findElements(By.xpath("//div/div[contains(@class,'dMenu')]"));
+		unifiedListMenu.addAll(navigationBar.findElements(By.xpath("//div/div/div/div[contains(@class,'aDropdownItem')]")));
+		
+		
+		int size = unifiedListMenu.size();
 		int i =0;
+		unifiedListMenu.clear();
 		
 		do {
 			
+			 try {
+				 if(driver.findElement(By.id("DialogLayer_1")).isDisplayed()) {
 			
-			
+				
+				driver.findElement(By.xpath("//button[@class='ui-button ui-corner-all ui-widget']")).click();
+				}
+			 }catch (org.openqa.selenium.NoSuchElementException e) {}
+			 
+			 
+			unifiedListMenu = navigationBar.findElements(By.xpath("//div/div[contains(@class,'dMenu')]"));
+			unifiedListMenu.addAll(navigationBar.findElements(By.xpath("//div/div/div/div[contains(@class,'aDropdownItem')]")));
 			parseDefaultmenu();
 			parseMoremenu();
-			//for(int t=0;t<8;t++)
-				//System.out.println(unifiedListMenu.get(t).getAttribute("innerHTML").toString());
 			
 			if(actualDefaultMenu.equals(validDefaultMenu)&&actualMoreMenu.equals(validMoreMenu)) {
 				equals = true;
@@ -91,23 +104,17 @@ public class NavigationMenu {
 				equals = false;
 						
 				}
-			/*System.out.println(unifiedListMenu.get(i).getAttribute("class"));
-			WebElement elem = unifiedListMenu.get(i);
-			System.out.println(unifiedListMenu.get(1).getAttribute("class"));
-			System.out.println(unifiedListMenu.get(2).getAttribute("class"));
-			/*WebElement elem = unifiedListMenu.get(i);
-			elem.click();*/
+			if(actualDefaultMenu.size()<i) {
+				System.out.println("More");
+				//driver.findElement(By.xpath("//div[contains(text(),'More')]")).click();
+				}
+			unifiedListMenu.get(i).click();
 			
-			unifiedListMenu.get(1).click();
-			Thread.sleep(5000);
-			unifiedListMenu.get(2).click();
-			Thread.sleep(5000);
-			unifiedListMenu.get(3).click();
-			Thread.sleep(5000);
 			actualDefaultMenu.clear();
 			actualMoreMenu.clear();
+			unifiedListMenu.clear();
 			
-		}while(unifiedListMenu.size()> i);
+		}while(size> i);
 		
 		
 		
@@ -117,31 +124,18 @@ public class NavigationMenu {
 	
 	public void parseDefaultmenu() {
 		
-		List<WebElement> navigation = navigationBar.findElements(By.xpath("*"));
+		List<WebElement> navigation = navigationBar.findElements(By.xpath("//div/div[contains(@class,'dMenu')]"));
 		actualDefaultMenu = new ArrayList <String> ();
-		for(WebElement e: navigation) {
-			String attribute = e.getAttribute("class").toString().toLowerCase();
-			if(attribute.contains("dmenu")) {
-				actualDefaultMenu.add(e.getAttribute("innerHTML").toString());
-				
-				if(oneDOccurence)unifiedListMenu.add(e);
-				}
-		}
-		oneDOccurence = false;
-		
-		
+		for(WebElement e: navigation) actualDefaultMenu.add(e.getAttribute("innerHTML").toString());
+	
 	}
 	
 	public void parseMoremenu() {
 	
-		List<WebElement> morenavigation =  moreMenu.findElements(By.xpath("*"));
+		List<WebElement> morenavigation =  navigationBar.findElements(By.xpath("//div/div/div/div[contains(@class,'aDropdownItem')]"));
 		actualMoreMenu = new ArrayList <String> ();
-		for(WebElement e: morenavigation) {
-		 actualMoreMenu.add(e.getAttribute("innerHTML").toString());
-		 if(oneMOccurence) {unifiedListMenu.add(e);}
-		}
+		for(WebElement e: morenavigation) actualMoreMenu.add(e.getAttribute("innerHTML").toString());
 		
-		oneMOccurence = false;
 		
 	}
 	
