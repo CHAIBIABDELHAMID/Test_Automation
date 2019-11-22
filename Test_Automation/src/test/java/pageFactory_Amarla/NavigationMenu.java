@@ -106,7 +106,7 @@ public class NavigationMenu {
 				}
 			if(actualDefaultMenu.size()<i) {
 				System.out.println("More");
-				//driver.findElement(By.xpath("//div[contains(text(),'More')]")).click();
+				//driver.findElement(By.xpath("//div[contains(text(),'More')]")).click(); 
 				}
 			unifiedListMenu.get(i).click();
 			
