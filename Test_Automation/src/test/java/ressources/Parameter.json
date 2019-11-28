@@ -24,6 +24,14 @@
 			"Username":"achaibi",
 			"Password":"TYG1101"
 			
+		},
+		
+		{
+			"Environment":"Build",
+			"Path":"https://build.blue-day.com/",
+			"Username":"abdelhamid",
+			"Password":"AChaibi"
+			
 		}
 	]
 	

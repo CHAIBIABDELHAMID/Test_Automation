@@ -2,6 +2,9 @@ package stepDefinitions_Amarla;
 
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 
@@ -49,7 +52,7 @@ public class stepDefinition_Amarla {
 		SingeltonBaseClass instance = SingeltonBaseClass.getInstance();
 		driver = instance.getdriver();
 		wait = new WebDriverWait(driver, 10);
-		
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 	}
 	
 	
@@ -137,26 +140,29 @@ public class stepDefinition_Amarla {
        assertEquals(role.toLowerCase(),footer.toLowerCase());
        
     }
-
+	 @When("^The default page is displayed$")
+	    public void the_default_page_is_displayed() throws Throwable {
+	    	
+	    	org.testng.Assert.assertEquals(driver.findElement(By.xpath("//div[@id='dNavigationBar']/div/div[contains(@class,'selected')]")).getAttribute("innerHTML").toString(),"Calendar");
+	    
+	    }
+	 
     @When("^Navigate from menus$")
     public void navigate_from_menus() throws Throwable {
-        
-    }
+    	NavigationMenu navMenu = new NavigationMenu(driver);
+    	
+    	navMenu.CheckMenu(parser.default_menu,parser.more_menu);
+    }	
 
     @Then("^Menu is correctly displayed$")
     public void menu_is_correctly_displayed() throws Throwable {
-      
+    	NavigationMenu navMenu = new NavigationMenu(driver);
+    	org.testng.Assert.assertEquals(navMenu.equals, true);
     }
 
-    @When("^The default menu is correct$")
-    public void the_default_menu_is_correct() throws Throwable {
-    	NavigationMenu navMenu = new NavigationMenu(driver);
-    	navMenu.CheckMenu(parser.default_menu,parser.more_menu);
-    
-    }
-	
-	
-	
+   
+
+   
 	
 	
 	

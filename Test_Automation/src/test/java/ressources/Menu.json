@@ -37,7 +37,7 @@
 	"DefaultMenu": [
 		{"Default_menu"  : "Calendar"},
 		{"Default_menu"  : "Plan"},
-		{"Default_menu"  : "Ranking"},
+		{"Default_menu"  : "Adv. Ranking"},
 		{"Default_menu"  : "Plot"},
 		{"Default_menu"  : "CSL Performance"},
 		{"Default_menu"  : "N/A"},
@@ -50,10 +50,10 @@
 		{"More_menu" 	: "Store Plan"},
 		{"More_menu" 	: "Store Week"},
 		{"More_menu" 	: "Top 10 Segments"},
+		{"More_menu" 	: "Ranking"},
 		{"More_menu" 	: "Ind. Perf. Sum."},
 		{"More_menu" 	: "Trend Graph"},
 		{"More_menu" 	: "Skills"},
-		{"More_menu" 	: "N/A"},
 		{"More_menu" 	: "N/A"},
 		{"More_menu" 	: "N/A"},
 		{"More_menu" 	: "N/A"}
@@ -68,7 +68,7 @@
 	"DefaultMenu": [
 		{"Default_menu"  : "Calendar"},
 		{"Default_menu"  : "Plan"},
-		{"Default_menu"  : "Ranking"},
+		{"Default_menu"  : "Adv. Ranking"},
 		{"Default_menu"  : "Plot"},
 		{"Default_menu"  : "CSL Performance"},
 		{"Default_menu"  : "N/A"},
@@ -81,10 +81,10 @@
 		{"More_menu" 	: "Store Plan"},
 		{"More_menu" 	: "Store Week"},
 		{"More_menu" 	: "Top 10 Segments"},
+		{"More_menu" 	: "Ranking"},
 		{"More_menu" 	: "Ind. Perf. Sum."},
 		{"More_menu" 	: "Trend Graph"},
 		{"More_menu" 	: "Skills"},
-		{"More_menu" 	: "N/A"},
 		{"More_menu" 	: "N/A"},
 		{"More_menu" 	: "N/A"},
 		{"More_menu" 	: "N/A"}
@@ -99,7 +99,7 @@
 	"DefaultMenu": [
 		{"Default_menu"  : "Calendar"},
 		{"Default_menu"  : "Plan"},
-		{"Default_menu"  : "Ranking"},
+		{"Default_menu"  : "Adv. Ranking"},
 		{"Default_menu"  : "Plot"},
 		{"Default_menu"  : "CSL Performance"},
 		{"Default_menu"  : "N/A"},
@@ -112,10 +112,10 @@
 		{"More_menu" 	: "Store Plan"},
 		{"More_menu" 	: "Store Week"},
 		{"More_menu" 	: "Top 10 Segments"},
+		{"More_menu" 	: "Ranking"},
 		{"More_menu" 	: "Ind. Perf. Sum."},
 		{"More_menu" 	: "Trend Graph"},
 		{"More_menu" 	: "Skills"},
-		{"More_menu" 	: "N/A"},
 		{"More_menu" 	: "N/A"},
 		{"More_menu" 	: "N/A"},
 		{"More_menu" 	: "N/A"}

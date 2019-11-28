@@ -12,11 +12,12 @@ Scenario: Test
 @test
 Scenario Outline: Check All Roles Menu
 	When Role <role> is selected
-	And  The default menu is correct
+	And  The default page is displayed
 	When Navigate from menus
 	Then Menu is correctly displayed
 	Examples:
 	| role |
-	| STM  |
 	| REG  |
+	| COR  |
 	| DIV  |
+	| REG  |
