@@ -1,16 +1,16 @@
 Feature: Navigation Menu
 
 Background: User Is Logged In
-	Given Navigate to "amarla" on "qa" Login page and connect
-	
+	Given Navigate to "amarla" on "build" Login page and connect
+	Then  Home page is displayed
 	
 	
 
 Scenario: Test
 	Given This is a test
 
-@test
-Scenario Outline: Check All Roles Menu
+@Associate_Navigation
+Scenario Outline: Associate Navigation
 	When Role <role> is selected
 	And  The default page is displayed
 	When Navigate from menus

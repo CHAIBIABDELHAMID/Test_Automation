@@ -34,11 +34,6 @@ public class NavigationMenu {
 	
 	WebDriver driver;
 	
-	
-	@FindBy (xpath = "//div[contains(text(),'Settings')]")
-	WebElement settings_btn ;
-	@FindBy(xpath = "//div[contains(text(),'Change Role »')]")
-	WebElement changeRole_btn ;
 	@FindBy(xpath = "//div[@id='dNavigationBar']")
 	WebElement navigationBar;
 	
@@ -47,7 +42,7 @@ public class NavigationMenu {
 	List<String> actualMoreMenu  ;
 	public List<WebElement> unifiedListMenu; 
 	public static boolean equals = true;
-	 WebDriverWait waitElem ;
+	WebDriverWait waitElem ;
 	
 	
  	public NavigationMenu(WebDriver driver) {
@@ -56,130 +51,96 @@ public class NavigationMenu {
 		 PageFactory.initElements(driver, this);
 	}
 	
-	public void SelectRole(String role) throws Throwable {
-		
-		settings_btn.click();
-		changeRole_btn.click();
-		
-		List<WebElement> stores = driver.findElement(By.id("RoleSwitcher")).findElements(By.xpath("*"));
-		int storeIndex=0;
-		String elementSearched;
-		boolean find = false;
-		
-		do {
-			
-			elementSearched = stores.get(storeIndex).getAttribute("class").toLowerCase();
-			if(elementSearched.contains(role.toLowerCase())) { 
-				
-				stores.get(storeIndex).click();
-				find = true;
-				
-			}else storeIndex++;
-			
-		}while(stores.size()> storeIndex && find == false  );
-			
-		 Thread.sleep(5000);
-		
-		
-	}
+	
 	
 	
 	
 	public void  CheckMenu(List <String>validDefaultMenu, List <String>validMoreMenu) throws InterruptedException  {
 		
 		
-		waitElem = new WebDriverWait(driver, 3000);
-		unifiedListMenu = new ArrayList <WebElement> ();
-		unifiedListMenu = navigationBar.findElements(By.xpath("//div/div[contains(@class,'dMenu')]"));
-		unifiedListMenu.addAll(navigationBar.findElements(By.xpath("//div/div/div/div[contains(@class,'aDropdownItem')]")));
+			waitElem = new WebDriverWait(driver, 3000);
+			unifiedListMenu = new ArrayList <WebElement> ();
+			unifiedListMenu = navigationBar.findElements(By.xpath("//div/div[contains(@class,'dMenu')]"));
+			unifiedListMenu.addAll(navigationBar.findElements(By.xpath("//div/div/div/div[contains(@class,'aDropdownItem')]")));
+			
+			int i =1;
+			int size = unifiedListMenu.size();
+			unifiedListMenu.clear();
 		
 		
-		int size = unifiedListMenu.size();
-		int i =1;
-		unifiedListMenu.clear();
-		
-		
-		do {
+			do {
 			
-			
-			//waitElem.until(ExpectedConditions.presenceOfElementLocated(By.id("linkSiteMap")));
-			
-			
-			Wait<WebDriver> waits = new FluentWait<WebDriver>(driver)
+				Wait<WebDriver> waits = new FluentWait<WebDriver>(driver)
 				    .withTimeout(12, TimeUnit.SECONDS)
 				    .pollingEvery(3, TimeUnit.SECONDS)
 				    .ignoring(NoSuchElementException.class);
-				    
-			
-			WebElement logo = waits.until(new Function<WebDriver, WebElement>() 
-			{
-			  public WebElement apply(WebDriver driver) {return driver.findElement(By.id("linkSiteMap"));}
-			});
-			
-			
-			Thread.sleep(5000);
-			
-			unifiedListMenu = navigationBar.findElements(By.xpath("//div/div[contains(@class,'dMenu')]"));
-			unifiedListMenu.addAll(navigationBar.findElements(By.xpath("//div/div/div/div[contains(@class,'aDropdownItem')]")));
-			parseDefaultmenu();
-			parseMoremenu();
-			
-			
-			
-			
-			
-			if(actualDefaultMenu.equals(validDefaultMenu)&&actualMoreMenu.equals(validMoreMenu) && i<size) {
-				equals = true;
-				//Click More menu
 				
-				if(i>=actualDefaultMenu.size()) driver.findElement(By.xpath("//div[@class='dropbtn bMenu arrow'][contains(text(),'More')]")).click();
-				System.out.println(unifiedListMenu.get(i).getText());	
-				unifiedListMenu.get(i).click();
+				WebElement logo = waits.until(new Function<WebDriver, WebElement>() 
+				{
+					public WebElement apply(WebDriver driver) {return driver.findElement(By.id("linkSiteMap"));}
+				});
+			
+				Thread.sleep(5000);
+			
+				unifiedListMenu = navigationBar.findElements(By.xpath("//div/div[contains(@class,'dMenu')]"));
+				unifiedListMenu.addAll(navigationBar.findElements(By.xpath("//div/div/div/div[contains(@class,'aDropdownItem')]")));
+				parseDefaultmenu();
+				parseMoremenu();
+			
+			
+			
+			
+			
+				if(actualDefaultMenu.equals(validDefaultMenu)&&actualMoreMenu.equals(validMoreMenu) && i<size) {
+					equals = true;
+				
+					//Click More menu
+					if(i>=actualDefaultMenu.size()) driver.findElement(By.xpath("//div[@class='dropbtn bMenu arrow'][contains(text(),'More')]")).click();
+						//System.out.println(unifiedListMenu.get(i).getText());	
+						unifiedListMenu.get(i).click();
 				
 				 
-				//Check if picker is displayed
-				 try {
-					 if(driver.findElement(By.id("dCommonSelector")).isDisplayed()) {
+						//Check if picker is displayed
+						try {
+							if(driver.findElement(By.id("dCommonSelector")).isDisplayed()) {
 						
-						 Actions action = new Actions(driver);
+								Actions action = new Actions(driver);
 						 
-						 try {
-							if( driver.findElement(By.xpath("//div[contains(@class,'dSelectorEntity') and ./span[contains(.,'Store')]]")).isDisplayed()) {
-								action.moveToElement( driver.findElement(By.xpath("//div[contains(@class,'dSelectorEntity') and ./span[contains(.,'Store')]]//span[contains(@role,'presentation')]"))).click().build().perform();
-								action.moveToElement( driver.findElement(By.xpath("//li[1]"))).click().build().perform();
-								
+								try {
+									if( driver.findElement(By.xpath("//div[contains(@class,'dSelectorEntity') and ./span[contains(.,'Store')]]")).isDisplayed()) {
+										action.moveToElement( driver.findElement(By.xpath("//div[contains(@class,'dSelectorEntity') and ./span[contains(.,'Store')]]//span[contains(@role,'presentation')]"))).click().build().perform();
+										action.moveToElement( driver.findElement(By.xpath("//li[1]"))).click().build().perform();
+									}
+								}catch(Exception ex) {}
+						 
+								action.moveToElement( driver.findElement(By.xpath("//input[@id='btCSSubmit']"))).click().build().perform();
 							}
-						 }catch(Exception ex) {}
-						 
-						 action.moveToElement( driver.findElement(By.xpath("//input[@id='btCSSubmit']"))).click().build().perform();
-					 }
-				 }catch (org.openqa.selenium.NoSuchElementException e) {}
+							
+						}catch (org.openqa.selenium.NoSuchElementException e) {}
 				
 				 
-				 //Check if no data error message is displayed
-				 try {
-					 if(driver.findElement(By.id("DialogLayer_1")).isDisplayed()) 
-				    driver.findElement(By.xpath("//button[@class='ui-button ui-corner-all ui-widget']")).click();
+						//Check if no data error message is displayed
+						try {
+							if(driver.findElement(By.id("DialogLayer_1")).isDisplayed()) 
+								driver.findElement(By.xpath("//button[@class='ui-button ui-corner-all ui-widget']")).click();
 					 
-				 }catch (org.openqa.selenium.NoSuchElementException e) {}
+						}catch (org.openqa.selenium.NoSuchElementException e) {}
 			
-			}
-			else {
-				equals = false;
-				break;}
+					}
+					else {
+						equals = false;
+						break;
+					}
 			
 			
 			
 		
-			actualDefaultMenu.clear();
-			actualMoreMenu.clear();
-			unifiedListMenu.clear();
-			i++;
+				actualDefaultMenu.clear();
+				actualMoreMenu.clear();
+				unifiedListMenu.clear();
+				i++;
 			
-		}while( i<size && equals);
-		
-		
-	
+			}while( i<size && equals);
 		
 	}
 	
@@ -188,6 +149,7 @@ public class NavigationMenu {
 		
 		List<WebElement> navigation = navigationBar.findElements(By.xpath("//div/div[contains(@class,'dMenu')]"));
 		actualDefaultMenu = new ArrayList <String> ();
+		
 		for(WebElement e: navigation) actualDefaultMenu.add(e.getAttribute("innerHTML").toString());
 	
 	}
@@ -196,7 +158,9 @@ public class NavigationMenu {
 	
 		List<WebElement> morenavigation =  navigationBar.findElements(By.xpath("//div/div/div/div[contains(@class,'aDropdownItem')]"));
 		actualMoreMenu = new ArrayList <String> ();
+		
 		for(WebElement e: morenavigation) actualMoreMenu.add(e.getAttribute("innerHTML").toString());
+	
 	}
 	
 
