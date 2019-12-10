@@ -2,6 +2,7 @@ package pageFactory_Amarla;
 
 
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -14,9 +15,9 @@ public class LoginPage {
 	
 	WebDriver driver;
 	
-	@FindBy(id = "logintxt")
+	@FindBy(xpath = "//input[@id='logintxt']")
 	WebElement usernametextbox;
-	@FindBy(id = "passwordtxt")
+	@FindBy(xpath = "//input[@id='passwordtxt']")
 	WebElement passwordtextbox;
 	@FindBy(xpath = "//input[@class='loginbutton']")
 	WebElement loginbutton;
@@ -38,11 +39,13 @@ public class LoginPage {
 		
 		usernametextbox.clear();
 		usernametextbox.sendKeys(username);
+	
 		passwordtextbox.clear();
 		passwordtextbox.sendKeys(password);
 		
 		
 		loginbutton.click();
+		
 		
 		
 	}

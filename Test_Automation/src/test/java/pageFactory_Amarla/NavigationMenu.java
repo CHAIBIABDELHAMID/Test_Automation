@@ -71,7 +71,7 @@ public class NavigationMenu {
 			do {
 			
 				Wait<WebDriver> waits = new FluentWait<WebDriver>(driver)
-				    .withTimeout(12, TimeUnit.SECONDS)
+				    .withTimeout(36, TimeUnit.SECONDS)
 				    .pollingEvery(3, TimeUnit.SECONDS)
 				    .ignoring(NoSuchElementException.class);
 				
@@ -105,7 +105,7 @@ public class NavigationMenu {
 							if(driver.findElement(By.id("dCommonSelector")).isDisplayed()) {
 						
 								Actions action = new Actions(driver);
-						 
+								Thread.sleep(2000);
 								try {
 									if( driver.findElement(By.xpath("//div[contains(@class,'dSelectorEntity') and ./span[contains(.,'Store')]]")).isDisplayed()) {
 										action.moveToElement( driver.findElement(By.xpath("//div[contains(@class,'dSelectorEntity') and ./span[contains(.,'Store')]]//span[contains(@role,'presentation')]"))).click().build().perform();

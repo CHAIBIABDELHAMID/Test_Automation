@@ -54,14 +54,24 @@ public class Common_Method {
 			do {
 			
 				elementSearched = stores.get(storeIndex).getAttribute("class").toLowerCase();
+			
 				if(elementSearched.contains(role.toLowerCase())) { 
-					stores.get(storeIndex).click();
-					find = true;
+					
+					if(!role.equalsIgnoreCase("reg") ) find = true;
+					
+					else if(role.equalsIgnoreCase("reg") && stores.get(storeIndex).getAttribute("innerHTML").contains("BA"))  find = true;
+					else storeIndex++;
+					
+						
+					
 				
 				}else storeIndex++;
+				
 			
 			}while(stores.size()> storeIndex && find == false  );
-			
+		
+			if(find)stores.get(storeIndex).click();
+				
 			Thread.sleep(5000);
 		
 	}

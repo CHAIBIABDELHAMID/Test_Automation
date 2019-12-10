@@ -18,6 +18,11 @@ public class Calendar {
 	WebDriver driver;
 	List <String> colored_by = Arrays.asList("Sales","Traffic","Conv %","Trans","ATV","UPT","$/FS","SPAH","Hours %");
 	List <String> segment = Arrays.asList("All Store Types","VSBA","VSFA");
+	List <String> summaryColumnsSTM = Arrays.asList("&nbsp;","Area","Enterprise");
+	List <String> summaryColumnsREG = Arrays.asList("&nbsp;","Division","Enterprise");
+	List <String> metrics = Arrays.asList("Actual","Plan Var %");
+	List <String> summaryMetrics = Arrays.asList("Sales","$/FS","Conv %","ATV","UPT");
+	
 	
 	@FindBy (xpath = "//div[@class='dReportStoreTitle")
 	public WebElement page_title ;
@@ -39,9 +44,14 @@ public class Calendar {
 	public WebElement segment_label ;
 	@FindBy (xpath = "//select[@id='segmentdesc']")
 	public WebElement segment_listbox ;
-	
-	
-	
+	@FindBy (xpath = "//div[@class='dReportDescTitle']")
+	public WebElement variance_color ;
+	@FindBy (xpath = "//div[@id='dProdCalLegend']")
+	public WebElement legend ;
+	@FindBy(xpath = "//table[@id='tStoreRollUp']")
+	public WebElement summary_table;
+	@FindBy(xpath = "//table[@id='tProdCal']")
+	public WebElement weeks;
 	
 	
 	
@@ -75,7 +85,7 @@ public class Calendar {
 	public void check_segment() {
 		
 		
-		  List<WebElement> listbox = segment_listbox.findElements(By.xpath("*"));
+		  List<WebElement> listbox = segment_listbox.findElements(By.xpath("./tbody/tr"));
 		  ArrayList <String> list = new ArrayList <String> ();
 		
 		  	for(WebElement e: listbox){
@@ -93,6 +103,49 @@ public class Calendar {
 	}
 	
 	
+	public void check_summaryTable(String role) {
+		
+		List <WebElement> listcolumn = driver.findElements(By.xpath("//table[@id='tStoreRollUp']/thead[1]/tr[3]/*"));
+		List <WebElement> listmetrics =driver.findElements(By.xpath("//table[@id='tStoreRollUp']/tbody/tr/td[1]"));
+		
+		List <String> actualcolumn = new ArrayList <String> ();
+		List <String> actualmetrics = new ArrayList <String> ();
+		
+		for(WebElement e: listcolumn) actualcolumn.add(e.getAttribute("innerHTML"));
+		for(WebElement e: listmetrics) {actualmetrics.add(e.getAttribute("innerHTML"));}
+		
+		if(role.equalsIgnoreCase("stm")) {
+		 org.testng.Assert.assertTrue(actualcolumn.containsAll(summaryColumnsSTM) && summaryColumnsSTM.containsAll(actualcolumn));
+		 org.testng.Assert.assertTrue(actualmetrics.containsAll(summaryMetrics) && summaryMetrics.containsAll(actualmetrics));
+		}
+		if(role.equalsIgnoreCase("reg")) {
+			 org.testng.Assert.assertTrue(actualcolumn.containsAll(summaryColumnsREG) && summaryColumnsREG.containsAll(actualcolumn));
+			 org.testng.Assert.assertTrue(actualmetrics.containsAll(summaryMetrics) && summaryMetrics.containsAll(actualmetrics));
+		}
+		
+	}
 	
+	
+	public void check_weeks_from1to52() throws InterruptedException {
+		
+		List <WebElement> listweeks = weeks.findElements(By.xpath("./tbody[1]/tr[@class='trProdCal']"));
+	
+		String number;	
+	
+		
+		for(WebElement e: listweeks) {
+			
+			number= e.findElement(By.xpath("./td[10]/table/tbody/tr/th/div")).getText();
+			number=number.substring(number.length()-2);
+			int week_number = Integer.valueOf(number);
+			
+			boolean comparison = (week_number<53 && week_number>0) ? true : false;
+			org.testng.Assert.assertTrue(comparison);
+	
+			
+			
+		}
+		
+	}
 	
 }

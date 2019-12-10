@@ -1,7 +1,7 @@
 Feature: Navigation Menu
 
 Background: User Is Logged In
-	Given Navigate to "amarla" on "build" Login page and connect
+	Given Navigate to "amarla" on "qa" Login page and connect
 	Then  Home page is displayed
 	
 	
@@ -20,4 +20,4 @@ Scenario Outline: Associate Navigation
 	| REG  |
 	| COR  |
 	| DIV  |
-	| REG  |
+	| STM  |

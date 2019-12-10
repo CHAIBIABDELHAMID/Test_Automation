@@ -2,43 +2,39 @@ package stepDefinitions_Amarla;
 
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.SessionId;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import common.Parser;
 import common.SingeltonBaseClass;
-
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pageFactory_Amarla.Calendar;
 import pageFactory_Amarla.Common_Method;
 import pageFactory_Amarla.LoginPage;
 import pageFactory_Amarla.NavigationMenu;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-import cucumber.api.java.en.And;
 
 
 public class stepDefinition_Amarla {
 
 	
 	public  static WebDriver driver ;
-	public  WebDriverWait wait ;
+	public WebDriverWait wait ;
 	public Parser parser = new Parser();
+	public static String glb_role;
 	
 /*************************************************************************************************/
 	
@@ -67,29 +63,6 @@ public class stepDefinition_Amarla {
 	}
 	
 	
-/*************************************************************************************************/
-	
-								/** TEST STEP tag= @test **/
-	
-/*************************************************************************************************/
-	@Given("^This is a test$")
-	public void this_is_a_test() throws Throwable {
-		
-		System.out.println("This is a test");
-		
-		//parser.deserializeMenu("STM");
-		
-		/*ParameterParser pp = new ParameterParser();
-		pp.deserializeProjects("a","b");
-		System.out.println("Cookie Name : "+pp.cookieName.toString()+"\n"+"Cookie Value : "+pp.cookieValue.toString()); */
-		
-}
-
-	
-	@Given("^This is a 2nd test$")
-	public void this_is_a_2nd_test() throws Throwable {
-		  System.out.println("test2");
-	}
 	
 /*************************************************************************************************/
 	
@@ -107,11 +80,14 @@ public class stepDefinition_Amarla {
 			//Setting up cookies
 			Cookie projectCookie = new Cookie(parser.cookieName,parser.cookieValue);
 			driver.manage().addCookie(projectCookie);
-			
 			//Connecting using username and password
 			LoginPage loginPage = new LoginPage(driver);
 			loginPage.submit_username_and_password(parser.userName,parser.password);
-    	
+			
+			
+	
+			
+			
 	
 	}
 	
@@ -137,7 +113,8 @@ public class stepDefinition_Amarla {
 /*************************************************************************************************/
 	 @Given("^Role (.+) is selected$")
 	 public void role_is_selected(String role) throws Throwable {
-	       
+		    
+		 	glb_role = role;
 			parser.deserializeMenu(role);
 		       
 			Common_Method common = new Common_Method(driver);
@@ -159,9 +136,13 @@ public class stepDefinition_Amarla {
 	
 	@Given("^Select role \"([^\"]*)\"$")
     public void select_role_something(String role) throws Throwable {
-		  
+			
+		   glb_role = role;
 		   Common_Method common = new Common_Method(driver);
-	       common.SelectRole(role);
+	       try{
+	    	   common.SelectRole(role);
+	       
+	       }catch(Exception e) {}
 	       
 	       String footer = driver.findElement(By.xpath("//div[@class='runOn']")).getText().toString();
 		   footer = footer.substring(footer.length()-3);
@@ -215,8 +196,14 @@ public class stepDefinition_Amarla {
     
     
     
-
-    @When("^Page Title is displayed$")
+    @Then("^Calendar menu is selected$")
+    public void calendar_menu_is_selected() throws Throwable {
+    	
+    	  org.testng.Assert.assertTrue(driver.findElement(By.xpath("//div[contains(@class,'dMenu') and contains(text(),'Calendar')]")).getAttribute("class").contains("selected"));
+    	  
+    }
+    
+    @And("^Page Title is displayed$")
     public void page_title_is_displayed() throws Throwable {
     	
     	  org.testng.Assert.assertEquals(driver.getTitle(),"Calendar","Page Title is wrong");
@@ -232,6 +219,22 @@ public class stepDefinition_Amarla {
     		org.testng.Assert.assertEquals(calendar.next_year_btn.isDisplayed(), true);
     		org.testng.Assert.assertEquals(calendar.last_year_btn.isDisplayed(), true);
     		
+    }
+    
+    @And("^Summary table is displayed$")
+    public void summary_table_is_displayed() throws Throwable {
+    		
+    		Calendar calendar = new Calendar(driver);
+    		org.testng.Assert.assertTrue(calendar.summary_table.isDisplayed());
+    		calendar.check_summaryTable(glb_role);
+    }
+    
+    @And("^Variance color display default color$")
+    public void variance_color_display_default_color() throws Throwable {
+    	Calendar calendar = new Calendar(driver);
+    	Select s = new Select(calendar.colored_listbox);
+    	
+    	org.testng.Assert.assertTrue(calendar.variance_color.getText().contains(s.getFirstSelectedOption().getText()));
     }
 
     @And("^Pencil icon is displayed$")
@@ -273,6 +276,17 @@ public class stepDefinition_Amarla {
     		calendar.check_segment();
     }
 	
-   
+    
+    @And("^Legends are displayed$")
+    public void legends_are_displayed() throws Throwable {
+    	Calendar calendar = new Calendar(driver);
+    	org.testng.Assert.assertTrue(calendar.legend.isDisplayed());
+    }
+
+    @Then("^Weeks are displayed from Week1 to Week52$")
+    public void weeks_are_displayed_from_week1_to_week52() throws Throwable {
+    	Calendar calendar = new Calendar(driver);
+    	calendar.check_weeks_from1to52();
+    }
 
 }
