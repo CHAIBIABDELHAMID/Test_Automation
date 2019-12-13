@@ -76,17 +76,19 @@ public class stepDefinition_Amarla {
        
 			parser.deserializeProjects(project,environment);
 			driver.get(parser.path);
-			
+			/*
 			//Setting up cookies
 			Cookie projectCookie = new Cookie(parser.cookieName,parser.cookieValue);
 			driver.manage().addCookie(projectCookie);
+			*/
 			//Connecting using username and password
 			LoginPage loginPage = new LoginPage(driver);
 			loginPage.submit_username_and_password(parser.userName,parser.password);
 			
+			Select s = new Select(driver.findElement(By.xpath("//select[@id='sw-siteSwitcher']")));
+			s.selectByValue(parser.projectName);
 			
-	
-			
+			Thread.sleep(2000);
 			
 	
 	}

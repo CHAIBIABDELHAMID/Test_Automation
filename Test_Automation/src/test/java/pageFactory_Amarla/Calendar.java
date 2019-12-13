@@ -18,8 +18,8 @@ public class Calendar {
 	WebDriver driver;
 	List <String> colored_by = Arrays.asList("Sales","Traffic","Conv %","Trans","ATV","UPT","$/FS","SPAH","Hours %");
 	List <String> segment = Arrays.asList("All Store Types","VSBA","VSFA");
-	List <String> summaryColumnsSTM = Arrays.asList("&nbsp;","Area","Enterprise");
-	List <String> summaryColumnsREG = Arrays.asList("&nbsp;","Division","Enterprise");
+	List <String> summaryColumnsSTM = Arrays.asList("Area","Enterprise");
+	List <String> summaryColumnsREG = Arrays.asList("Division","Enterprise");
 	List <String> metrics = Arrays.asList("Actual","Plan Var %");
 	List <String> summaryMetrics = Arrays.asList("Sales","$/FS","Conv %","ATV","UPT");
 	
@@ -105,7 +105,7 @@ public class Calendar {
 	
 	public void check_summaryTable(String role) {
 		
-		List <WebElement> listcolumn = driver.findElements(By.xpath("//table[@id='tStoreRollUp']/thead[1]/tr[3]/*"));
+		List <WebElement> listcolumn = driver.findElements(By.xpath("//table[@id='tStoreRollUp']/thead[1]/tr[3]/th[@colspan]"));
 		List <WebElement> listmetrics =driver.findElements(By.xpath("//table[@id='tStoreRollUp']/tbody/tr/td[1]"));
 		
 		List <String> actualcolumn = new ArrayList <String> ();

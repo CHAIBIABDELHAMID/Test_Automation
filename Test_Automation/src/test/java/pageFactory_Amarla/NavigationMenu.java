@@ -141,7 +141,7 @@ public class NavigationMenu {
 				i++;
 			
 			}while( i<size && equals);
-		
+		org.testng.Assert.assertTrue(equals);
 	}
 	
 	
