@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 import com.google.gson.Gson;
@@ -55,7 +54,7 @@ public class Parser {
 				br_projects = new BufferedReader(new FileReader("src/test/java/ressources/Parameter.json"));
 				projects = gson_projects.fromJson(br_projects, Projects.class);
 			
-				if (projects != null) {for(Project project : projects.getProjects());}
+				//if (projects != null) {for(Project project : projects.getProjects());}
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -104,7 +103,7 @@ public class Parser {
 						br_roles = new BufferedReader(new FileReader("src/test/java/ressources/Menu.json"));
 						roles = gson_roles.fromJson(br_roles, Roles.class);
 					
-						if (roles != null) {for(Role role : roles.getRoles());}
+					
 
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();

@@ -2,7 +2,7 @@ package pageFactory_Amarla;
 
 import org.openqa.selenium.support.FindBy;
 
-import static org.junit.Assert.assertTrue;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +11,10 @@ import java.util.concurrent.TimeUnit;
 
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -26,8 +23,7 @@ import org.openqa.selenium.NoSuchElementException;
 
 import com.google.common.base.Function;
 
-import cucumber.api.java.gl.E;
-import cucumber.runtime.Timeout;
+
 
 public class NavigationMenu {
 	
@@ -41,7 +37,7 @@ public class NavigationMenu {
 	List<String> actualDefaultMenu ;
 	List<String> actualMoreMenu  ;
 	public List<WebElement> unifiedListMenu; 
-	public static boolean equals = true;
+	public boolean equals = true;
 	WebDriverWait waitElem ;
 	
 	
@@ -70,11 +66,13 @@ public class NavigationMenu {
 		
 			do {
 			
+				@SuppressWarnings("deprecation")
 				Wait<WebDriver> waits = new FluentWait<WebDriver>(driver)
 				    .withTimeout(36, TimeUnit.SECONDS)
 				    .pollingEvery(3, TimeUnit.SECONDS)
 				    .ignoring(NoSuchElementException.class);
 				
+				@SuppressWarnings("unused")
 				WebElement logo = waits.until(new Function<WebDriver, WebElement>() 
 				{
 					public WebElement apply(WebDriver driver) {return driver.findElement(By.id("linkSiteMap"));}

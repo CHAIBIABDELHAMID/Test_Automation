@@ -50,7 +50,7 @@ Scenario: Calendar Default Display For role REG
 	And Colored by is displayed
 	And Legends are displayed
 	
-@Calendar
+@Calendarstm
 Scenario Outline: Weeks are displayed from Week1 to Week52
 	Given Role <role> is selected
 	Then Weeks are displayed from Week1 to Week52
