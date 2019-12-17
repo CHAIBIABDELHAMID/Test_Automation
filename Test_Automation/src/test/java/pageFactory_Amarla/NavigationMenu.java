@@ -63,7 +63,7 @@ public class NavigationMenu {
 			int size = unifiedListMenu.size();
 			unifiedListMenu.clear();
 		
-		
+			Common_Method com = new Common_Method(driver);
 			do {
 			
 				@SuppressWarnings("deprecation")
@@ -77,8 +77,9 @@ public class NavigationMenu {
 				{
 					public WebElement apply(WebDriver driver) {return driver.findElement(By.id("linkSiteMap"));}
 				});
-			
-				Thread.sleep(5000);
+				
+	    		com.page_isloaded();
+				
 			
 				unifiedListMenu = navigationBar.findElements(By.xpath("//div/div[contains(@class,'dMenu')]"));
 				unifiedListMenu.addAll(navigationBar.findElements(By.xpath("//div/div/div/div[contains(@class,'aDropdownItem')]")));

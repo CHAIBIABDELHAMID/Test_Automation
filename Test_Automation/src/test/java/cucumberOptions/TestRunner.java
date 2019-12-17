@@ -10,7 +10,9 @@ import cucumber.api.junit.Cucumber;
 @CucumberOptions(
 		features="src/test/java/TestCases_Amarla",
 		glue= {"stepDefinitions_Amarla"},
-		tags= "@Calendarstm")
+		tags= "@Calendar",
+		strict=true,
+		plugin= {"pretty","html:src/test/java/target/report"})
 
 
 public class TestRunner {

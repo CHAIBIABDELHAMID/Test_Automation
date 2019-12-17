@@ -6,8 +6,7 @@ Background: User Is Logged In
 	
 	
 
-Scenario: Test
-	Given This is a test
+
 
 @Associate_Navigation
 Scenario Outline: Associate Navigation

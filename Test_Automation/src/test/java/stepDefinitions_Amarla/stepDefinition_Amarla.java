@@ -176,7 +176,7 @@ public class stepDefinition_Amarla {
     public void menu_is_correctly_displayed() throws Throwable {
     	
     	NavigationMenu navMenu = new NavigationMenu(driver);
-    	org.testng.Assert.assertEquals(navMenu.equals, true);
+    	org.testng.Assert.assertTrue(navMenu.equals, "The menu is changing");
     	
     }
 
@@ -199,8 +199,9 @@ public class stepDefinition_Amarla {
     
     @Then("^Calendar menu is selected$")
     public void calendar_menu_is_selected() throws Throwable {
-    	
-    	  org.testng.Assert.assertTrue(driver.findElement(By.xpath("//div[contains(@class,'dMenu') and contains(text(),'Calendar')]")).getAttribute("class").contains("selected"));
+    		Common_Method com = new Common_Method(driver);
+    		com.page_isloaded();
+    		org.testng.Assert.assertTrue(driver.findElement(By.xpath("//div[contains(@class,'dMenu') and contains(text(),'Calendar')]")).getAttribute("class").contains("selected"),"Calendar is not displayed as selected");
     	  
     }
     
@@ -215,10 +216,10 @@ public class stepDefinition_Amarla {
     public void navigation_buttons_are_displayed() throws Throwable {
     	 
     		Calendar calendar = new Calendar(driver);
-    		org.testng.Assert.assertEquals(calendar.next_btn.isDisplayed(), true);
-    		org.testng.Assert.assertEquals(calendar.previous_btn.isDisplayed(), true);
-    		org.testng.Assert.assertEquals(calendar.next_year_btn.isDisplayed(), true);
-    		org.testng.Assert.assertEquals(calendar.last_year_btn.isDisplayed(), true);
+    		org.testng.Assert.assertEquals(calendar.next_btn.isDisplayed(), true,"Next Button is not Displayed");
+    		org.testng.Assert.assertEquals(calendar.previous_btn.isDisplayed(), true,"Previous Button is not Displayed");
+    		org.testng.Assert.assertEquals(calendar.next_year_btn.isDisplayed(), true,"NextYear Button is not Displayed");
+    		org.testng.Assert.assertEquals(calendar.last_year_btn.isDisplayed(), true,"LastYear Button is not Displayed");
     		
     }
     
@@ -226,7 +227,7 @@ public class stepDefinition_Amarla {
     public void summary_table_is_displayed() throws Throwable {
     		
     		Calendar calendar = new Calendar(driver);
-    		org.testng.Assert.assertTrue(calendar.summary_table.isDisplayed());
+    		org.testng.Assert.assertTrue(calendar.summary_table.isDisplayed(),"Summary Table is not displayed");
     		calendar.check_summaryTable(glb_role);
     }
     
@@ -235,14 +236,14 @@ public class stepDefinition_Amarla {
     	Calendar calendar = new Calendar(driver);
     	Select s = new Select(calendar.colored_listbox);
     	
-    	org.testng.Assert.assertTrue(calendar.variance_color.getText().contains(s.getFirstSelectedOption().getText()));
+    	org.testng.Assert.assertTrue(calendar.variance_color.getText().contains(s.getFirstSelectedOption().getText()),"Selected Color is not displayed in the Variance Color Measure label");
     }
 
     @And("^Pencil icon is displayed$")
     public void pencil_icon_is_displayed() throws Throwable {
     	
     		Calendar calendar = new Calendar(driver);
-    		org.testng.Assert.assertEquals(calendar.pencil_btn.isDisplayed(), true);
+    		org.testng.Assert.assertTrue(calendar.pencil_btn.isDisplayed(),"Common Selector is not displayed");
     	
     }
     
@@ -251,8 +252,8 @@ public class stepDefinition_Amarla {
     public void displayin_is_displayed() throws Throwable {
     	
     		Common_Method com = new Common_Method(driver);
-    		org.testng.Assert.assertEquals(com.displayin_label.isDisplayed(), true);
-    		org.testng.Assert.assertEquals(com.displayin_listbox.isDisplayed(), true);
+    		org.testng.Assert.assertTrue(com.displayin_label.isDisplayed(), "Display in Label is not displayed");
+    		org.testng.Assert.assertTrue(com.displayin_listbox.isDisplayed(), "Display in Listbox is not displayed");
     		com.check_displayin();
     }
 
@@ -261,8 +262,8 @@ public class stepDefinition_Amarla {
     public void colored_by_is_displayed() throws Throwable {
     	
     		Calendar calendar  = new Calendar(driver);
-    		org.testng.Assert.assertEquals(calendar.colored_label.isDisplayed(), true);
-    		org.testng.Assert.assertEquals(calendar.colored_listbox.isDisplayed(), true);
+    		org.testng.Assert.assertTrue(calendar.colored_label.isDisplayed(), "Colored Label is not displayed");
+    		org.testng.Assert.assertTrue(calendar.colored_listbox.isDisplayed(), "Colored listbox is not displayed");
     		calendar.check_colored();
     		
     }
@@ -272,8 +273,8 @@ public class stepDefinition_Amarla {
     public void segment_is_displayed() throws Throwable {
     	
     		Calendar calendar = new Calendar(driver);
-    		org.testng.Assert.assertEquals(calendar.segment_label.isDisplayed(), true);
-    		org.testng.Assert.assertEquals(calendar.segment_listbox.isDisplayed(), true);
+    		org.testng.Assert.assertTrue(calendar.segment_label.isDisplayed(), "Segment Label is not displayed");
+    		org.testng.Assert.assertTrue(calendar.segment_listbox.isDisplayed(), "Segment listbox is not displayed");
     		calendar.check_segment();
     }
 	
@@ -281,7 +282,7 @@ public class stepDefinition_Amarla {
     @And("^Legends are displayed$")
     public void legends_are_displayed() throws Throwable {
     	Calendar calendar = new Calendar(driver);
-    	org.testng.Assert.assertTrue(calendar.legend.isDisplayed());
+    	org.testng.Assert.assertTrue(calendar.legend.isDisplayed(),"Legends are not displayed");
     }
 
     @Then("^Weeks are displayed from Week1 to Week52$")
@@ -290,4 +291,16 @@ public class stepDefinition_Amarla {
     	calendar.check_weeks_from1to52();
     }
 
+    @Then("^ Weather icons are displayed$")
+    public void weather_icons_are_displayed() throws Throwable {
+       
+    }
+
+    @And("^  Weather is in Celsuis$")
+    public void weather_is_in_celsuis() throws Throwable {
+        
+    }
+    
+    
+    
 }

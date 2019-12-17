@@ -9,14 +9,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import org.openqa.selenium.JavascriptExecutor;
 
 
 public class Common_Method {
 	
 	WebDriver driver;
-	List <String> display_in = Arrays.asList("Gross Sales","Net Sales");
-	List <String> display_in_lc = Arrays.asList("Net Sales LC","Gross Sales LC");
+	List <String> display_in = Arrays.asList("Gross Sales $","Net Sales $");
+	List <String> display_in_lc = Arrays.asList("Gross Sales LC","Net Sales LC");
 	
 	
 	@FindBy (xpath = "//div[contains(text(),'Settings')]")
@@ -103,7 +107,7 @@ public class Common_Method {
 								merged.addAll(display_in);
 								merged.addAll(display_in_lc);
 				
-							}else merged.addAll(display_in_lc);
+							}else merged.addAll(display_in);
 							
 							
 							break;
@@ -112,8 +116,8 @@ public class Common_Method {
 		}
 		
 		
-		org.testng.Assert.assertTrue(s.getFirstSelectedOption().getText().equalsIgnoreCase("Net Sales LC"));	
-		org.testng.Assert.assertTrue(list.size()==merged.size() && list.containsAll(merged) && merged.containsAll(list));
+		org.testng.Assert.assertTrue(s.getFirstSelectedOption().getText().equalsIgnoreCase("Net Sales $"),"Display in Default value is not Net Sales $");	
+		org.testng.Assert.assertTrue(list.size()==merged.size() && list.containsAll(merged) && merged.containsAll(list),"Display in list is not as expected");
 		
 		
 		merged.clear();
@@ -122,7 +126,19 @@ public class Common_Method {
 	}
 	
 	
-	
+	public void page_isloaded() {
+		
+		
+		ExpectedCondition<Boolean> pageLoadCondition = new
+        ExpectedCondition<Boolean>() {
+           public Boolean apply(WebDriver driver) {
+           return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
+           }
+        };
+        
+        WebDriverWait waitpage=new WebDriverWait(driver, 20000);
+        waitpage.until(pageLoadCondition);
+	}
 	
 	
 	

@@ -50,7 +50,7 @@ Scenario: Calendar Default Display For role REG
 	And Colored by is displayed
 	And Legends are displayed
 	
-@Calendarstm
+@Calendar
 Scenario Outline: Weeks are displayed from Week1 to Week52
 	Given Role <role> is selected
 	Then Weeks are displayed from Week1 to Week52
@@ -60,4 +60,9 @@ Scenario Outline: Weeks are displayed from Week1 to Week52
 	| DIV  |
 	| REG  |
 	| STM  |
+@CalendarWeather	
+Scenario: Weather icons display weather in celsuis
+	Given Select role "STM"
+	Then  Weather icons are displayed
+	And   Weather is in Celsuis
 	
