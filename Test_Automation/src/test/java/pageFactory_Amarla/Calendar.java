@@ -42,8 +42,8 @@ public class Calendar {
 	public WebElement colored_listbox ;
 	@FindBy (xpath = "//span[contains(text(),'Segment')]")
 	public WebElement segment_label ;
-	@FindBy (xpath = "//select[@id='segmentdesc']")
-	public WebElement segment_listbox ;
+	@FindBy (xpath = "//select[@id='segmentdesc']/option")
+	public List <WebElement> segment_listbox ;
 	@FindBy (xpath = "//div[@class='dReportDescTitle']")
 	public WebElement variance_color ;
 	@FindBy (xpath = "//div[@id='dProdCalLegend']")
@@ -52,6 +52,13 @@ public class Calendar {
 	public WebElement summary_table;
 	@FindBy(xpath = "//table[@id='tProdCal']")
 	public WebElement weeks;
+	@FindBy(xpath = "//div[@class='weatherBlock']")
+	public List <WebElement> weather_icon;
+	@FindBy(xpath = "//tr[@class='trProdCal']"
+				  + "/td[contains(@class,'NetSales') and not(contains(@class,'LightGray'))]"
+				  + "/table[contains(@class,'Click') and not(contains(@celldate,'0.0000'))]")
+	public List <WebElement> days;
+	
 	
 	
 	
@@ -84,15 +91,13 @@ public class Calendar {
 	
 	public void check_segment() {
 		
-		
-		  List<WebElement> listbox = segment_listbox.findElements(By.xpath("./tbody/tr"));
 		  ArrayList <String> list = new ArrayList <String> ();
 		
-		  	for(WebElement e: listbox){
+		  	for(WebElement e: segment_listbox){
 				list.add(e.getText());
 			}
 
-		  Select s = new Select(segment_listbox);
+		  Select s = new Select(driver.findElement(By.id("segmentdesc")));
 	
 		  org.testng.Assert.assertTrue(s.getFirstSelectedOption().getText().equalsIgnoreCase("All Store Types"));	
 		  org.testng.Assert.assertTrue(segment.containsAll(list));
@@ -146,6 +151,27 @@ public class Calendar {
 			
 		}
 		
+	}
+	
+	public void check_weatherIcons_vs_days() {
+		
+    	org.testng.Assert.assertEquals(weather_icon.size(), days.size(),"Weather icons are not displayed for all days");
+     
+	}
+	
+	public void check_weather_unit() {
+		
+		
+		for(WebElement e: weather_icon) {
+			
+			int tempMin = Integer.parseInt(e.findElement(By.xpath("//div[@class='tempMin']")).getAttribute("innerHTML"));
+			int tempMax = Integer.parseInt(e.findElement(By.xpath("//div[@class='tempMax']")).getAttribute("innerHTML"));
+			org.testng.Assert.assertTrue(tempMin<30,"Weather Value is not in Celsuis");
+			org.testng.Assert.assertTrue(tempMax<45,"Weather Value is not in Celsuis");
+			org.testng.Assert.assertTrue(e.findElement(By.xpath("//div[@class='tempUnit']")).getAttribute("innerHTML").equalsIgnoreCase("°C"),"Weather Unit is not in Celsuis");
+			org.testng.Assert.assertTrue(!e.findElement(By.xpath("//div[@class='weatherDesc']")).getAttribute("innerHTML").equalsIgnoreCase("null"),"Weather Description is Null");
+		}
+	
 	}
 	
 }

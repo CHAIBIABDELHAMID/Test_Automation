@@ -46,7 +46,8 @@ public class Common_Method {
 	
 	
 	public void SelectRole(String role) throws Throwable {
-		
+			Common_Method com = new Common_Method(driver);
+			com.page_isloaded();
 			settings_btn.click();
 			changeRole_btn.click();
 			
@@ -127,7 +128,6 @@ public class Common_Method {
 	
 	
 	public void page_isloaded() {
-		
 		
 		ExpectedCondition<Boolean> pageLoadCondition = new
         ExpectedCondition<Boolean>() {

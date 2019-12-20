@@ -274,7 +274,7 @@ public class stepDefinition_Amarla {
     	
     		Calendar calendar = new Calendar(driver);
     		org.testng.Assert.assertTrue(calendar.segment_label.isDisplayed(), "Segment Label is not displayed");
-    		org.testng.Assert.assertTrue(calendar.segment_listbox.isDisplayed(), "Segment listbox is not displayed");
+    		org.testng.Assert.assertTrue(!calendar.segment_listbox.isEmpty(), "Segment listbox is not displayed");
     		calendar.check_segment();
     }
 	
@@ -291,14 +291,17 @@ public class stepDefinition_Amarla {
     	calendar.check_weeks_from1to52();
     }
 
-    @Then("^ Weather icons are displayed$")
-    public void weather_icons_are_displayed() throws Throwable {
-       
+    @Then("^Weather icons are displayed for all days$")
+    public void weather_icons_are_displayed_for_all_days() throws Throwable {
+    	Calendar calendar = new Calendar(driver);
+    	calendar.check_weatherIcons_vs_days();
+    	
     }
 
-    @And("^  Weather is in Celsuis$")
-    public void weather_is_in_celsuis() throws Throwable {
-        
+    @Then("^Weather is in Celsuis$")
+    public void weather_is_in_Celsuis() throws Throwable {
+    	Calendar calendar = new Calendar(driver);
+    	calendar.check_weather_unit();
     }
     
     

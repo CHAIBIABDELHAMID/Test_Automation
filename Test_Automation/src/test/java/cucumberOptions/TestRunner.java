@@ -8,11 +8,11 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
+		//plugin= {"pretty","html:target/amarla"},
+		strict=true,
 		features="src/test/java/TestCases_Amarla",
 		glue= {"stepDefinitions_Amarla"},
-		tags= "@Calendar",
-		strict=true,
-		plugin= {"pretty","html:src/test/java/target/report"})
+		tags= "@Calendar,@Associate_Navigation")
 
 
 public class TestRunner {

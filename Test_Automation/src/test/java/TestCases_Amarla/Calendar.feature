@@ -60,9 +60,9 @@ Scenario Outline: Weeks are displayed from Week1 to Week52
 	| DIV  |
 	| REG  |
 	| STM  |
-@CalendarWeather	
+@Calendar	
 Scenario: Weather icons display weather in celsuis
 	Given Select role "STM"
-	Then  Weather icons are displayed
+	Then  Weather icons are displayed for all days
 	And   Weather is in Celsuis
 	
