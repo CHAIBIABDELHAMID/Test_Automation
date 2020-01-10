@@ -18,22 +18,14 @@ public class Calendar {
 	WebDriver driver;
 	List <String> colored_by = Arrays.asList("Sales","Traffic","Conv %","Trans","ATV","UPT","$/FS","SPAH","Hours %");
 	List <String> segment = Arrays.asList("All Store Types","VSBA","VSFA");
-	List <String> summaryColumnsSTM = Arrays.asList("Area","Enterprise");
-	List <String> summaryColumnsREG = Arrays.asList("Division","Enterprise");
+	List <String> summaryColumnsSTM = Arrays.asList("My Store","Area","Enterprise");
+	List <String> summaryColumnsREG = Arrays.asList("My Area","Division","Enterprise");
 	List <String> metrics = Arrays.asList("Actual","Plan Var %");
 	List <String> summaryMetrics = Arrays.asList("Sales","$/FS","Conv %","ATV","UPT");
 	
 	
 	@FindBy (xpath = "//div[@class='dReportStoreTitle")
 	public WebElement page_title ;
-	@FindBy (xpath = "//input[@id='CIMSNext']")
-	public WebElement next_btn ;
-	@FindBy (xpath = "//input[@id='CIMSPrev']")
-	public WebElement previous_btn ;
-	@FindBy (xpath = "//div[@class='dReportTimeTitle']//input[@id='btProdCalNY']")
-	public WebElement next_year_btn ;
-	@FindBy (xpath = "//div[@class='dReportTimeTitle']//input[@id='btProdCalLY']")
-	public WebElement last_year_btn ;
 	@FindBy (xpath = "//div[@class='dCommonSelectorIcon']")
 	public WebElement pencil_btn ;
 	@FindBy (xpath = "//div[@id='dProdCalChangeBkGrnColorMeas']//span[@class='sProdCalChangeBkGrnColorLabel'][contains(text(),'Colored by')]")
@@ -59,7 +51,20 @@ public class Calendar {
 				  + "/table[contains(@class,'Click') and not(contains(@celldate,'0.0000'))]")
 	public List <WebElement> days;
 	
+	@FindBy(xpath = "//td[contains(@class,'Today')]")
+	public WebElement today;
+	public static int day_num;
+	@FindBy(xpath = "//td[contains(@class,'Today')]/preceding-sibling::td[1]")
+	public WebElement yesterday;
+	@FindBy(xpath = "//td[contains(@class,'Today')]/following-sibling::td[1]']")
+	public WebElement tomorrow;
 	
+	@FindBy(xpath = "//td[contains(@class,'CurrentWeek')]")
+	public WebElement current_week;
+	@FindBy(xpath = "//td[contains(@class,'PastWeek')]")
+	public WebElement past_week;
+	@FindBy(xpath = "//td[contains(@class,'FuturetWeek')]")
+	public WebElement future_week;
 	
 	
 	public Calendar(WebDriver driver) {
@@ -164,10 +169,6 @@ public class Calendar {
 		
 		for(WebElement e: weather_icon) {
 			
-			int tempMin = Integer.parseInt(e.findElement(By.xpath("//div[@class='tempMin']")).getAttribute("innerHTML"));
-			int tempMax = Integer.parseInt(e.findElement(By.xpath("//div[@class='tempMax']")).getAttribute("innerHTML"));
-			org.testng.Assert.assertTrue(tempMin<30,"Weather Value is not in Celsuis");
-			org.testng.Assert.assertTrue(tempMax<45,"Weather Value is not in Celsuis");
 			org.testng.Assert.assertTrue(e.findElement(By.xpath("//div[@class='tempUnit']")).getAttribute("innerHTML").equalsIgnoreCase("°C"),"Weather Unit is not in Celsuis");
 			org.testng.Assert.assertTrue(!e.findElement(By.xpath("//div[@class='weatherDesc']")).getAttribute("innerHTML").equalsIgnoreCase("null"),"Weather Description is Null");
 		}

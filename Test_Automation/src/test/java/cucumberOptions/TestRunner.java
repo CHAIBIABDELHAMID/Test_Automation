@@ -12,7 +12,7 @@ import cucumber.api.junit.Cucumber;
 		strict=true,
 		features="src/test/java/TestCases_Amarla",
 		glue= {"stepDefinitions_Amarla"},
-		tags= "@Calendar,@Associate_Navigation")
+		tags= "@test")
 
 
 public class TestRunner {

@@ -21,7 +21,9 @@ public class Common_Method {
 	WebDriver driver;
 	List <String> display_in = Arrays.asList("Gross Sales $","Net Sales $");
 	List <String> display_in_lc = Arrays.asList("Gross Sales LC","Net Sales LC");
-	
+	public List <String> months = Arrays.asList("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec");
+	public static String label_month;
+	public static int index_label_month;
 	
 	@FindBy (xpath = "//div[contains(text(),'Settings')]")
 	WebElement settings_btn ;
@@ -33,6 +35,16 @@ public class Common_Method {
 	public WebElement displayin_listbox ;
 	@FindBy (xpath = "//div[@class='runOn']")
 	public WebElement role ;
+	@FindBy (xpath = "//div[@class='dReportTimeTitle']")
+	public WebElement navigation_label;
+	@FindBy (xpath = "//input[@id='CIMSNext']")
+	public WebElement next_btn ;
+	@FindBy (xpath = "//input[@id='CIMSPrev']")
+	public WebElement previous_btn ;
+	@FindBy (xpath = "//div[@class='dReportTimeTitle']//input[@id='btProdCalNY']")
+	public WebElement next_year_btn ;
+	@FindBy (xpath = "//div[@class='dReportTimeTitle']//input[@id='btProdCalLY']")
+	public WebElement last_year_btn ;
 	
 	
 	public Common_Method(WebDriver driver) {

@@ -2,7 +2,9 @@ package stepDefinitions_Amarla;
 
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
@@ -215,11 +217,13 @@ public class stepDefinition_Amarla {
     @And("^Navigation buttons are displayed$")
     public void navigation_buttons_are_displayed() throws Throwable {
     	 
-    		Calendar calendar = new Calendar(driver);
-    		org.testng.Assert.assertEquals(calendar.next_btn.isDisplayed(), true,"Next Button is not Displayed");
-    		org.testng.Assert.assertEquals(calendar.previous_btn.isDisplayed(), true,"Previous Button is not Displayed");
-    		org.testng.Assert.assertEquals(calendar.next_year_btn.isDisplayed(), true,"NextYear Button is not Displayed");
-    		org.testng.Assert.assertEquals(calendar.last_year_btn.isDisplayed(), true,"LastYear Button is not Displayed");
+    		Common_Method com = new Common_Method(driver);
+    		
+        	
+    		org.testng.Assert.assertEquals(com.next_btn.isDisplayed(), true,"Next Month button is not Displayed");
+    		org.testng.Assert.assertEquals(com.previous_btn.isDisplayed(), true,"Previous Month Button is not Displayed");
+    		org.testng.Assert.assertEquals(com.next_year_btn.isDisplayed(), true,"Next Year Button is not Displayed");
+    		org.testng.Assert.assertEquals(com.last_year_btn.isDisplayed(), true,"Last Year Button is not Displayed");
     		
     }
     
@@ -304,6 +308,167 @@ public class stepDefinition_Amarla {
     	calendar.check_weather_unit();
     }
     
+    @When("^Click on next month$")
+    public void click_on_next_month() throws Throwable {
+    	Common_Method com = new Common_Method(driver);
+    	
+		
+		String label = com.navigation_label.getText();
+    	Common_Method.label_month=label.substring(label.indexOf(',')-3, label.indexOf(','));
+    	Common_Method.index_label_month=com.months.indexOf(Common_Method.label_month);
+    	
+    	com.next_btn.click();
+    }
+
+    @When("^Click on previous month$")
+    public void click_on_previous_month() throws Throwable {
+    	Common_Method com = new Common_Method(driver);
+    	
+    	String label = com.navigation_label.getText();
+    	Common_Method.label_month=label.substring(label.indexOf(',')-3, label.indexOf(','));
+    	Common_Method.index_label_month=com.months.indexOf(Common_Method.label_month);
+    	
+    	com.previous_btn.click();
+    }
+
+    @When("^Click on next year$")
+    public void click_on_next_year() throws Throwable {
+    	Common_Method com = new Common_Method(driver);
+    	
+    	String label = com.navigation_label.getText();
+    	Common_Method.label_month=label.substring(label.length()-4);
+    	
+    	com.next_year_btn.click();
+    	
+    }
+
+    @When("^Click on last year$")
+    public void click_on_last_year() throws Throwable {
+    	Common_Method com = new Common_Method(driver);
+    	
+    	String label = com.navigation_label.getText();
+    	Common_Method.label_month=label.substring(label.length()-4);
+    	
+    	com.last_year_btn.click();
+    	
+    }
+
+    @Then("^Next month is displayed$")
+    public void next_month_is_displayed() throws Throwable {
+    	Common_Method com = new Common_Method(driver);
+    	com.page_isloaded();
+    	Thread.sleep(1000);
+    	String label = com.navigation_label.getText();
+    	label = label.substring(label.indexOf(',')-3, label.indexOf(','));
+    	
+    	if(Common_Method.label_month.equalsIgnoreCase("Dec"))
+    		 org.testng.Assert.assertEquals("Jan",label);
+    	else {
+    	
+    	 boolean comparison = (Common_Method.index_label_month < com.months.indexOf(label))?true:false ;
+    	 org.testng.Assert.assertEquals(comparison,true);
+    	}
+    	
+    }
+
+    @Then("^Previous month is displayed$")
+    public void previous_month_is_displayed() throws Throwable {
+    	Common_Method com = new Common_Method(driver);
+    	com.page_isloaded();
+    	Thread.sleep(1000);
+    	
     
+    	String label = com.navigation_label.getText();
+    	label = label.substring(label.indexOf(',')-3, label.indexOf(','));
+    	
+    	if(Common_Method.label_month.equalsIgnoreCase("Jan"))
+   		 org.testng.Assert.assertEquals("Dec",label);
+    	else {
+    		boolean comparison = (Common_Method.index_label_month > com.months.indexOf(label))?true:false ;
+    		org.testng.Assert.assertEquals(comparison,true);
+    	}
+    }
+
+    @Then("^Next year is displayed$")
+    public void next_year_is_displayed() throws Throwable {
+    	Common_Method com = new Common_Method(driver);
+    	com.page_isloaded();
+    	Thread.sleep(1000);
+    	
+    	String label = com.navigation_label.getText();
+    	label=label.substring(label.length()-4);
+    	int actual_year = Integer.parseInt(label);
+    	int last_year = Integer.parseInt(Common_Method.label_month);
+    	boolean comparison =(actual_year>last_year)?true:false;
+    	org.testng.Assert.assertEquals(comparison,true);
+    }
+
+    @Then("^Last year is displayed$")
+    public void last_year_is_displayed() throws Throwable {
+    	Common_Method com = new Common_Method(driver);
+    	com.page_isloaded();
+    	Thread.sleep(1000);
+    	
+    	String label = com.navigation_label.getText();
+    	label=label.substring(label.length()-4);
+    	int actual_year = Integer.parseInt(label);
+    	int last_year = Integer.parseInt(Common_Method.label_month);
+    	boolean comparison =(actual_year<last_year)?true:false;
+    	org.testng.Assert.assertEquals(comparison,true);
+    }
+    
+    
+    @Then("^Today is highlighted Bold$")
+    public void today_is_highlighted_bold() throws Throwable {
+       Calendar calendar = new Calendar(driver);
+       
+       Calendar.day_num = Integer.parseInt(calendar.today.findElement(By.xpath(".//div[@class='dProdCalCellDate']")).getText());
+   		
+       String str =  calendar.today.getCssValue("border");
+       org.testng.Assert.assertEquals(str, "4px solid rgb(0, 0, 0)","Today is not Highlighted Bold");
+    }
+    
+    @When("^Click on today from the calendar$")
+    public void click_on_today_from_the_calendar() throws Throwable {
+    	Calendar calendar = new Calendar(driver);
+    	
+    	calendar.today.click();
+    }
+
+    @Then("^Store Day page for today is displayed$")
+    public void store_day_page_for_today_is_displayed() throws Throwable {
+    	Common_Method com = new Common_Method(driver);
+    	com.page_isloaded();
+    	Thread.sleep(1000);
+    	
+    	String label = com.navigation_label.getText();
+    	label = label.substring(label.lastIndexOf(",")-1, label.lastIndexOf(","));
+    	int day_num = Integer.parseInt(label);
+    	
+    	 org.testng.Assert.assertEquals(driver.getTitle(), "Daily Plan","Daily Plan page is not displayed");
+    	 org.testng.Assert.assertEquals(Calendar.day_num,day_num,"Store day number is not the same as in Calendar");
+    	
+    }
+    
+    @When("^Click on yesterday from the calendar$")
+    public void click_on_yesterday_from_the_calendar() throws Throwable {
+    	Calendar calendar = new Calendar(driver);
+    	Calendar.day_num = Integer.parseInt(calendar.yesterday.findElement(By.xpath(".//div[@class='dProdCalCellDate']")).getText());
+    	calendar.yesterday.click();
+    }
+
+    @Then("^Store Day page for yesterday is displayed$")
+    public void store_day_page_for_yesterday_is_displayed() throws Throwable {
+    	Common_Method com = new Common_Method(driver);
+    	com.page_isloaded();
+    	Thread.sleep(1000);
+    	
+    	String label = com.navigation_label.getText();
+    	label = label.substring(label.lastIndexOf(",")-1, label.lastIndexOf(","));
+    	int day_num = Integer.parseInt(label);
+    	
+    	 org.testng.Assert.assertEquals(driver.getTitle(), "Daily Plan","Daily Plan page is not displayed");
+    	 org.testng.Assert.assertEquals(Calendar.day_num,day_num,"Store day number is not the same as in Calendar");
+    }
     
 }

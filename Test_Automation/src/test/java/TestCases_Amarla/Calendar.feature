@@ -66,3 +66,29 @@ Scenario: Weather icons display weather in celsuis
 	Then  Weather icons are displayed for all days
 	And   Weather is in Celsuis
 	
+@Calendar		
+Scenario: Fiscal month navigation
+	Given Select role "STM"
+	Then Navigation buttons are displayed
+	When Click on next month
+	Then Next month is displayed
+	When Click on previous month
+	Then Previous month is displayed
+	When Click on next year
+	Then Next year is displayed
+	When Click on last year
+	Then Last year is displayed
+
+@Calendar
+Scenario: Store Day for today
+	Given Select role "STM"
+	Then Today is highlighted Bold
+	When Click on today from the calendar
+	Then Store Day page for today is displayed
+	
+	@test
+Scenario: Store Day for yesterday is displayed
+	Given Select role "STM"
+	Then Today is highlighted Bold
+	When Click on yesterday from the calendar
+	Then Store Day page for yesterday is displayed
